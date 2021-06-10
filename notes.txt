@@ -1,0 +1,3 @@
+Exports configured to go to. These are gitignored so you might have to create the directories yourself
+./export/exe/ and ./export/html/
+
