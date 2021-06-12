@@ -6,7 +6,7 @@ var NUM_LEVELS = 2
 const GameState = preload("res://GameState.gd")
 
 var session_start_time
-var current_game_state = GameState.LEVEL_START
+var current_game_state = GameState.MAIN_MENU
 
 #stuff to save
 
@@ -94,7 +94,8 @@ func new_pin_click():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+	if current_game_state == GameState.MAIN_MENU:
+		return
 	if current_level != null:
 		if current_level.player_out_of_bounds():
 			# reset

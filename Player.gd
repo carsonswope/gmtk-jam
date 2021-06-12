@@ -7,7 +7,7 @@ var gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var floor_angle : float = PI/6.0;
 var vel : Vector2 = Vector2()
 var moving_right : bool = true
-var jump_height : float = 40
+var jump_height : float = 20
 
 onready var sprite : AnimatedSprite = get_node("FullBody/Sprite")
 onready var hat : Sprite = get_node("FullBody/Hat")
