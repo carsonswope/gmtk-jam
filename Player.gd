@@ -3,8 +3,8 @@ extends KinematicBody2D
 var score : int = 0
 var speed : int = 200
 var jumpForce : int = 600
-var gravity : int = 900
-var floor_angle : float = PI/4.0;
+var gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
+var floor_angle : float = PI/6.0;
 var vel : Vector2 = Vector2()
 var moving_right : bool = true
 var jump_height : float = 30
@@ -44,7 +44,9 @@ func _physics_process(delta):
 			var curr_move_angle = atan2(normal.y,normal.x) + (PI/2 if moving_right else -PI/2)
 			var curr_move_vector = Vector2(sin(curr_move_angle),cos(curr_move_angle))
 			if (!test_move(transform,(curr_move_vector*speed + Vector2.UP * jump_height)*delta)):
-				vel.y -= jump_height
+				var jump_vel = sqrt(2.0 / 3.0 * jump_height * 2.0 * gravity) # jump to twice the jump height
+				#play jump sound
+				vel.y = -jump_vel
 			else:
 				moving_right = !moving_right
 	else:
