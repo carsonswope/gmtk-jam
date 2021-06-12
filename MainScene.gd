@@ -22,7 +22,6 @@ const LEVELS = [
 func load_save():
 	var save_game = File.new()
 	if not save_game.file_exists("user://savegame.save"):
-		reset_save()
 		return # Error! We don't have a save to load.
 	save_game.open("user://savegame.save", File.READ)
 	while save_game.get_position() < save_game.get_len():
@@ -30,6 +29,7 @@ func load_save():
 		for i in line_data.keys():
 			if i == "levels_solved":
 				levels_solved = line_data[i]
+				print(levels_solved)
 			elif i == "play_time":
 				play_time = line_data[i]
 	save_game.close()
@@ -66,8 +66,8 @@ func _ready():
 	$gui_root/play_pause_button.connect("button_up", self, "play_pause_click")
 	$gui_root/reset_button.connect("button_up", self, "reset_click")
 	$gui_root/new_pin_button.connect("button_up", self, "new_pin_click")
+	reset_save()
 	load_save()
-	reset_save() #uncomment this to reset your local save
 	session_start_time = OS.get_ticks_msec()
 	init_main_menu()
 
@@ -98,7 +98,7 @@ func init_main_menu():
 		var level_button = Button.new()
 		level_button.text = String(i+1)
 		level_button.margin_left = i * 40
-		level_button.disabled = false if i==0 else !levels_solved[i-1][0]
+		level_button.disabled = false if i==0 else !levels_solved[String(i-1)][0]
 		level_button.connect("button_up", self, "_on_level_click", [i])
 		$menu_gui_root.add_child(level_button)
 		
@@ -133,7 +133,7 @@ func _process(delta):
 		# this null check shouldn't be necessary 
 		#var next_level_node = current_level.get_node("NextLevel")
 		elif current_level.is_completed():
-			levels_solved[current_level_idx] = [true,1]
+			levels_solved[String(current_level_idx)] = [true,1]
 			var next_level_idx = current_level_idx + 1
 			if next_level_idx >= LEVELS.size():
 				# but really, got to make an end-state

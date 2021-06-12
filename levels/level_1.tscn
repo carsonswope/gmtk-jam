@@ -44,7 +44,7 @@ pause_mode = 1
 position = Vector2( 64.9501, 191.815 )
 
 [node name="NextLevel" parent="layout" instance=ExtResource( 3 )]
-position = Vector2( 744.097, 191.815 )
+position = Vector2( 720.313, 214.41 )
 
 [node name="Platform 1" parent="layout" instance=ExtResource( 5 )]
 
