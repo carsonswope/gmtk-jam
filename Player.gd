@@ -10,6 +10,10 @@ var vel : Vector2 = Vector2()
 onready var sprite : AnimatedSprite = get_node("FullBody/Sprite")
 onready var hat : Sprite = get_node("FullBody/Hat")
 onready var body: Node2D = get_node("FullBody")
+
+func _ready():
+	hat.offset = Vector2(-10 if sprite.flip_h else 10, 0.0)
+
 func _physics_process(delta):
 	vel.x = 0
 	
