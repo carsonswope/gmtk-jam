@@ -7,7 +7,7 @@ var gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var floor_angle : float = PI/6.0;
 var vel : Vector2 = Vector2()
 var moving_right : bool = true
-var jump_height : float = 30
+var jump_height : float = 40
 
 onready var sprite : AnimatedSprite = get_node("FullBody/Sprite")
 onready var hat : Sprite = get_node("FullBody/Hat")
@@ -39,12 +39,16 @@ func _physics_process(delta):
 		if hit_floor:
 			body.rotation = -asin(normal.cross(Vector2.UP) / (normal.length() * Vector2.UP.length()))
 		if hit_wall:
-			if (!hit_floor):
+			if !hit_floor:
+				print("not on floor")
 				normal = Vector2.UP
 			var curr_move_angle = atan2(normal.y,normal.x) + (PI/2 if moving_right else -PI/2)
-			var curr_move_vector = Vector2(sin(curr_move_angle),cos(curr_move_angle))
-			if (!test_move(transform,(curr_move_vector*speed + Vector2.UP * jump_height)*delta)):
-				var jump_vel = sqrt(2.0 / 3.0 * jump_height * 2.0 * gravity) # jump to twice the jump height
+			var curr_move_vector = Vector2(cos(curr_move_angle),sin(curr_move_angle))
+			var jump_vector = (curr_move_vector*speed) * delta +jump_height * Vector2.UP
+			print (jump_vector)
+			if (!test_move(Transform2D(0.0,position),jump_vector,false)):
+				print (jump_vector)
+				var jump_vel = sqrt(2.0 / 3.0 * jump_height * gravity) # jump to twice the jump height
 				#play jump sound
 				vel.y = -jump_vel
 			else:
@@ -55,13 +59,12 @@ func _physics_process(delta):
 	if vel.x < 0:
 		sprite.animation = "walk"
 		sprite.playing = true
-		sprite.flip_h = true
 	elif vel.x > 0:
 		sprite.animation = "walk"
 		sprite.playing = true
-		sprite.flip_h = false
 	else:
 		sprite.animation = "walk"
 		sprite.playing = false
 		sprite.frame = 3
 	hat.offset = Vector2(-10 if sprite.flip_h else 10, 0.0)
+	sprite.flip_h = !moving_right
