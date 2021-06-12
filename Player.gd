@@ -31,7 +31,6 @@ func _physics_process(delta):
 			normal = normal + get_slide_collision(i).normal
 		body.rotation = -asin(normal.cross(Vector2.UP) / (normal.length() * Vector2.UP.length()))
 	else:
-		print(body.rotation * 180/ PI)
 		body.rotation = max(0,abs(body.rotation)-PI/30.0)*sign(body.rotation)
 	
 	if vel.x < 0:
