@@ -2,9 +2,11 @@ extends Node2D
 
 const TilePlatform = preload("res://TilePlatform.tscn")
 
+export var complete = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	MusicController.play_music()
+	#MusicController.play_music()
 	
 	var p0 = TilePlatform.instance()
 	add_child(p0)
