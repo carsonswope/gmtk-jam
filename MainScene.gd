@@ -24,9 +24,11 @@ func init_level(level_idx):
 		remove_child(current_level)
 	current_level_idx = level_idx
 	current_level = LEVELS[current_level_idx].instance()
+	current_level.pause_mode = PAUSE_MODE_STOP
 	add_child(current_level)
 	current_game_state = GameState.LEVEL_START
 	get_tree().paused = true
+	
 
 
 func _ready():
@@ -69,3 +71,5 @@ func _process(delta):
 		$gui_root/play_pause_button.set_text('>')
 	elif current_game_state == GameState.LEVEL_RUNNING:
 		$gui_root/play_pause_button.set_text('||')
+	else:
+		print('huh?')

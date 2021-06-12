@@ -3,6 +3,7 @@
 [ext_resource path="res://MainScene.gd" type="Script" id=3]
 
 [node name="MainScene" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 3 )
 
 [node name="gui_root" type="Node2D" parent="."]
@@ -10,6 +11,7 @@ pause_mode = 2
 position = Vector2( 16, 16 )
 
 [node name="play_pause_button" type="Button" parent="gui_root"]
+pause_mode = 2
 margin_top = 24.0
 margin_right = 24.0
 margin_bottom = 48.0

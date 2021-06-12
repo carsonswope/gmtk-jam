@@ -38,25 +38,25 @@ position = Vector2( 940, 220 )
 position = Vector2( 980, 220 )
 
 [node name="Node2D9" parent="." instance=ExtResource( 4 )]
-position = Vector2( 60, 220 )
+position = Vector2( 60, 300 )
 
 [node name="Node2D10" parent="." instance=ExtResource( 4 )]
-position = Vector2( 100, 220 )
+position = Vector2( 100, 300 )
 
 [node name="Node2D11" parent="." instance=ExtResource( 4 )]
-position = Vector2( 140, 220 )
+position = Vector2( 140, 300 )
 
 [node name="Node2D12" parent="." instance=ExtResource( 4 )]
-position = Vector2( 180, 220 )
+position = Vector2( 180, 300 )
 
 [node name="Node2D13" parent="." instance=ExtResource( 4 )]
-position = Vector2( 220, 220 )
+position = Vector2( 220, 300 )
 
 [node name="Node2D14" parent="." instance=ExtResource( 4 )]
-position = Vector2( 260, 220 )
+position = Vector2( 260, 300 )
 
 [node name="Node2D16" parent="." instance=ExtResource( 4 )]
-position = Vector2( 20, 220 )
+position = Vector2( 20, 300 )
 
 [node name="Platform 1" parent="." instance=ExtResource( 5 )]
 
@@ -66,7 +66,7 @@ tile_data = PoolIntArray( 131074, 0, 0, 131075, 4, 0, 131076, 4, 0, 131077, 2, 0
 [node name="Platform 2" parent="." instance=ExtResource( 5 )]
 
 [node name="tiles" parent="Platform 2" index="0"]
-tile_data = PoolIntArray( 262149, 0, 0, 262150, 4, 0, 262151, 4, 0, 262152, 4, 0, 262153, 4, 0, 262154, 4, 0, 262155, 4, 0, 262156, 4, 0, 262157, 4, 0, 262158, 4, 0, 262159, 4, 0, 262160, 4, 0, 262161, 4, 0, 262162, 2, 0 )
+tile_data = PoolIntArray( 196613, 0, 0, 196614, 4, 0, 196615, 4, 0, 196616, 4, 0, 196617, 4, 0, 196618, 4, 0, 196619, 4, 0, 196620, 4, 0, 196621, 4, 0, 196622, 2, 0 )
 
 [editable path="Platform 1"]
 [editable path="Platform 2"]

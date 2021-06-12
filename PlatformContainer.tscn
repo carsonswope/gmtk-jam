@@ -3,7 +3,7 @@
 [ext_resource path="res://PlatformContainer.gd" type="Script" id=1]
 [ext_resource path="res://resources/tilesets/platforms.png" type="Texture" id=2]
 
-[sub_resource type="TileSet" id=2]
+[sub_resource type="TileSet" id=1]
 0/name = "platforms.png 0"
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
@@ -94,7 +94,7 @@ script = ExtResource( 1 )
 
 [node name="tiles" type="TileMap" parent="."]
 mode = 2
-tile_set = SubResource( 2 )
+tile_set = SubResource( 1 )
 cell_size = Vector2( 40, 40 )
 cell_quadrant_size = 40
 cell_custom_transform = Transform2D( 40, 0, 0, 40, 0, 0 )

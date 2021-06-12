@@ -11,4 +11,4 @@ script = ExtResource( 2 )
 position = Vector2( 90.7692, 133.484 )
 
 [node name="NextLevel" parent="." instance=ExtResource( 3 )]
-position = Vector2( 362.541, 445.303 )
+position = Vector2( 480, 224 )

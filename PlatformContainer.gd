@@ -26,6 +26,8 @@ func _ready():
 		c.position -= center_of_gravity
 	#center the tile transform on the center of gravity as well
 	$tiles.set_custom_transform(Transform2D(Vector2(TILE_SIZE,0.0),Vector2(0.0,TILE_SIZE),-center_of_gravity))
+	$tiles.position = $body.position
+	$tiles.rotation = $body.rotation
 
 func _process(delta):
 	$tiles.position = $body.position
