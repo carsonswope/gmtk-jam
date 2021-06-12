@@ -10,7 +10,7 @@
 [ext_resource path="res://resources/sprites/guy/guy_walk_3.png" type="Texture" id=8]
 [ext_resource path="res://resources/sprites/hat.png" type="Texture" id=9]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=3]
 radius = 20.0
 
 [sub_resource type="SpriteFrames" id=2]
@@ -33,14 +33,16 @@ z_index = 2
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
-[node name="Sprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 2 )
-animation = "walk"
-frame = 3
+[node name="FullBody" type="Node2D" parent="."]
 
-[node name="Hat" type="Sprite" parent="."]
+[node name="Hat" type="Sprite" parent="FullBody"]
 position = Vector2( 0, -20 )
 z_index = 1
 texture = ExtResource( 9 )
+
+[node name="Sprite" type="AnimatedSprite" parent="FullBody"]
+frames = SubResource( 2 )
+animation = "walk"
+frame = 3

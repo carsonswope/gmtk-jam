@@ -7,8 +7,9 @@ var gravity : int = 900
 
 var vel : Vector2 = Vector2()
 
-onready var sprite : AnimatedSprite = get_node("Sprite")
-onready var hat : Sprite = get_node("Hat")
+onready var sprite : AnimatedSprite = get_node("FullBody/Sprite")
+onready var hat : Sprite = get_node("FullBody/Hat")
+onready var body: Node2D = get_node("FullBody")
 func _physics_process(delta):
 	vel.x = 0
 	
@@ -17,12 +18,21 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_right"):
 		vel.x += speed
 	
-	vel = move_and_slide(vel, Vector2.UP)
+	vel = move_and_slide(vel, Vector2.UP, false, 4, PI/9.0, false)
 	
 	vel.y += gravity * delta
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		vel.y -= jumpForce
+	if is_on_floor():
+		if Input.is_action_just_pressed("jump"):
+			vel.y -= jumpForce
+	if get_slide_count() > 0:
+		var normal = Vector2(0.0,0.0)
+		for i in range(0,get_slide_count()):
+			normal = normal + get_slide_collision(i).normal
+		body.rotation = -asin(normal.cross(Vector2.UP) / (normal.length() * Vector2.UP.length()))
+	else:
+		print(body.rotation * 180/ PI)
+		body.rotation = max(0,abs(body.rotation)-PI/30.0)*sign(body.rotation)
 	
 	if vel.x < 0:
 		sprite.animation = "walk"
