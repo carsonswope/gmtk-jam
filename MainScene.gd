@@ -57,7 +57,7 @@ func init_level(level_idx):
 func reset_save():
 	levels_solved = {}
 	for i in NUM_LEVELS:
-		levels_solved[i] = [false,-1]
+		levels_solved[String(i)] = [false,-1]
 	session_start_time = OS.get_ticks_msec()
 	play_time = 0
 
@@ -98,7 +98,7 @@ func init_main_menu():
 		var level_button = Button.new()
 		level_button.text = String(i+1)
 		level_button.margin_left = i * 40
-		level_button.disabled = false if i==0 else !levels_solved[i][0]
+		level_button.disabled = false if i==0 else !levels_solved[String(i)][0]
 		level_button.connect("button_up", self, "_on_level_click", [i])
 		$menu_gui_root.add_child(level_button)
 		

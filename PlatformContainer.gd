@@ -60,7 +60,14 @@ func coords_in_hole(pos):
 	for cell in $tiles.get_used_cells():
 		var id = $tiles.get_cell(cell.x, cell.y)
 		if id == 0 or id == 1 or id == 2: # these are types of tiles with holes in them
-			var cell_center = (Vector2(cell.x + 0.5, cell.y + 0.5) * TILE_SIZE)
+			var base_pos = $body.position
+			print(base_pos)
+			var unit_x = Vector2(cos($body.rotation),sin($body.rotation))
+			var unit_y = Vector2(-sin($body.rotation),cos($body.rotation))
+			var tile_origin = base_pos - (initial_position.x * unit_x + initial_position.y * unit_y)
+			print(tile_origin)
+			var pre_transform = (Vector2(cell.x + 0.5, cell.y + 0.5) * TILE_SIZE)
+			var cell_center = tile_origin + (pre_transform.x * unit_x + pre_transform.y * unit_y)
 			var diff = cell_center - pos
 			if sqrt(diff.dot(diff)) < 10:
 				return cell_center
