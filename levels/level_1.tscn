@@ -3,7 +3,7 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/level.gd" type="Script" id=2]
 [ext_resource path="res://scripts/NextLevel.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Tile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://TerrainContainer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://PlatformContainer.tscn" type="PackedScene" id=5]
 
 [node name="level_1" type="Node2D"]
@@ -11,62 +11,20 @@ z_index = -1
 script = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 865, 120 )
+position = Vector2( 64.9501, 191.815 )
 
 [node name="NextLevel" parent="." instance=ExtResource( 3 )]
 position = Vector2( 700, 460 )
 
-[node name="Node2D2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 740, 220 )
-
-[node name="Node2D3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 780, 220 )
-
-[node name="Node2D4" parent="." instance=ExtResource( 4 )]
-position = Vector2( 820, 220 )
-
-[node name="Node2D5" parent="." instance=ExtResource( 4 )]
-position = Vector2( 860, 220 )
-
-[node name="Node2D6" parent="." instance=ExtResource( 4 )]
-position = Vector2( 900, 220 )
-
-[node name="Node2D7" parent="." instance=ExtResource( 4 )]
-position = Vector2( 940, 220 )
-
-[node name="Node2D8" parent="." instance=ExtResource( 4 )]
-position = Vector2( 980, 220 )
-
-[node name="Node2D9" parent="." instance=ExtResource( 4 )]
-position = Vector2( 60, 300 )
-
-[node name="Node2D10" parent="." instance=ExtResource( 4 )]
-position = Vector2( 100, 300 )
-
-[node name="Node2D11" parent="." instance=ExtResource( 4 )]
-position = Vector2( 140, 300 )
-
-[node name="Node2D12" parent="." instance=ExtResource( 4 )]
-position = Vector2( 180, 300 )
-
-[node name="Node2D13" parent="." instance=ExtResource( 4 )]
-position = Vector2( 220, 300 )
-
-[node name="Node2D14" parent="." instance=ExtResource( 4 )]
-position = Vector2( 260, 300 )
-
-[node name="Node2D16" parent="." instance=ExtResource( 4 )]
-position = Vector2( 20, 300 )
-
 [node name="Platform 1" parent="." instance=ExtResource( 5 )]
 
 [node name="tiles" parent="Platform 1" index="0"]
-tile_data = PoolIntArray( 131074, 0, 0, 131075, 4, 0, 131076, 4, 0, 131077, 2, 0 )
+tile_data = PoolIntArray( 196616, 0, 0, 196617, 4, 0, 196618, 4, 0, 196619, 4, 0, 196620, 2, 0 )
 
-[node name="Platform 2" parent="." instance=ExtResource( 5 )]
+[node name="Terrain" parent="." instance=ExtResource( 4 )]
 
-[node name="tiles" parent="Platform 2" index="0"]
-tile_data = PoolIntArray( 196613, 0, 0, 196614, 4, 0, 196615, 4, 0, 196616, 4, 0, 196617, 4, 0, 196618, 4, 0, 196619, 4, 0, 196620, 4, 0, 196621, 4, 0, 196622, 2, 0 )
+[node name="Terrain" parent="Terrain" index="0"]
+tile_data = PoolIntArray( -262140, 0, 0, -262139, 0, 0, 393217, 0, 196609, 393218, 0, 3, 393219, 0, 3, 393220, 0, 3, 393221, 0, 0, 393232, 0, 196609, 393233, 0, 3, 393234, 0, 0, 458753, 0, 131072, 458754, 0, 131073, 458755, 0, 131073, 458756, 0, 131074, 458757, 0, 2, 458758, 0, 0, 458760, 0, 196609, 458761, 0, 0, 458764, 0, 196609, 458765, 0, 0, 458767, 0, 196609, 458768, 0, 65537, 458769, 0, 65539, 458770, 0, 196611, 524292, 0, 131072, 524293, 0, 131073, 524294, 0, 196611, 524296, 0, 131072, 524297, 0, 196611, 524300, 0, 131072, 524301, 0, 196611, 524303, 0, 131072, 524304, 0, 131073, 524305, 0, 196611 )
 
 [editable path="Platform 1"]
-[editable path="Platform 2"]
+[editable path="Terrain"]
