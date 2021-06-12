@@ -19,7 +19,6 @@ func _ready():
 	#look for child tiles and instantiate rigidbodies
 	var center_of_gravity = Vector2(0, 0)
 	for cell in $tiles.get_used_cells():
-		print(cell)
 		var id : int = $tiles.get_cell(cell.x,cell.y)
 		add_colliders(cell.x,cell.y,id)
 		center_of_gravity += Vector2(cell.x + 0.5, cell.y + 0.5) * TILE_SIZE
