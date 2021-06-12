@@ -11,6 +11,8 @@ var moving_platform_start_mouse_pos
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
+	$layout.pause_mode = PAUSE_MODE_STOP
+	set_game_state(GameState.LEVEL_START)
 
 func is_completed():
 	return $layout/NextLevel.completed

@@ -31,7 +31,7 @@ func _ready():
 	$gui_root/play_pause_button.connect("button_up", self, "play_pause_click")
 	$gui_root/reset_button.connect("button_up", self, "reset_click")
 
-	init_level(0)
+	init_level(1)
 	
 func play_pause_click():
 	if current_game_state == GameState.LEVEL_START or current_game_state == GameState.LEVEL_PAUSED:
