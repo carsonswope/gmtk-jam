@@ -47,3 +47,7 @@ margin_bottom = 48.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="menu_gui_root" type="Node2D" parent="."]
+pause_mode = 2
+position = Vector2( 16, 16 )

@@ -51,6 +51,8 @@ func init_level(level_idx):
 	add_child(current_level)
 	current_game_state = GameState.LEVEL_START
 	current_level.set_game_state(current_game_state)
+	toggle_game_gui_visibility(true)
+	return true
 
 func reset_save():
 	levels_solved = {}
@@ -67,7 +69,7 @@ func _ready():
 	load_save()
 	#reset_save() #uncomment this to reset your local save
 	session_start_time = OS.get_ticks_msec()
-	init_level(0)
+	init_main_menu()
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
@@ -86,6 +88,32 @@ func play_pause_click():
 	else:
 		print('hi')
 
+func toggle_game_gui_visibility(visible : bool):
+	for item in [$gui_root/level_label, $gui_root/new_pin_button, $gui_root/play_pause_button, $gui_root/reset_button]:
+		item.visible = visible
+
+func init_main_menu():
+	toggle_game_gui_visibility(false)
+	for i in NUM_LEVELS:
+		var level_button = Button.new()
+		level_button.text = String(i+1)
+		level_button.margin_left = i * 40
+		level_button.connect("button_up", self, "_on_level_click", [i])
+		$menu_gui_root.add_child(level_button)
+		
+
+func _on_level_click(lvl_idx):
+	if (init_level(lvl_idx)):
+		$menu_gui_root.queue_free()
+
+func return_to_main_menu():
+	if current_level:
+		remove_child(current_level)
+		current_level = null
+		current_level_idx = -1
+	current_game_state = GameState.MAIN_MENU
+	init_main_menu()
+
 func reset_click():
 	init_level(current_level_idx)
 
@@ -99,8 +127,8 @@ func _process(delta):
 	if current_level != null:
 		if current_level.player_out_of_bounds():
 			# reset
-			current_game_state = GameState.LEVEL_START
-			current_level.set_game_state(current_game_state)
+			init_level(current_level_idx)
+			
 		# this null check shouldn't be necessary 
 		#var next_level_node = current_level.get_node("NextLevel")
 		elif current_level.is_completed():
