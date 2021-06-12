@@ -17,7 +17,6 @@ config/icon="res://icon.png"
 [autoload]
 
 MusicController="*res://autoloads/MusicController.tscn"
-GameState="*res://autoloads/GameState.tscn"
 
 [input]
 

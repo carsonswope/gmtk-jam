@@ -1,16 +1,9 @@
 extends Node2D
 
-#const TilePlatform = preload("res://TilePlatform.tscn")
-
 var current_level_idx = -1
 var current_level = null
 
-enum GameState {
-	LEVEL_START = 0,
-	LEVEL_RUNNING = 1,
-	LEVEL_PAUSED = 2,
-	DEATH = 3,
-}
+const GameState = preload("res://GameState.gd")
 
 var current_game_state = GameState.LEVEL_START
 
@@ -24,10 +17,11 @@ func init_level(level_idx):
 		remove_child(current_level)
 	current_level_idx = level_idx
 	current_level = LEVELS[current_level_idx].instance()
-	current_level.pause_mode = PAUSE_MODE_STOP
+
 	add_child(current_level)
 	current_game_state = GameState.LEVEL_START
-	get_tree().paused = true
+	current_level.set_game_state(current_game_state)
+
 	
 
 
@@ -43,11 +37,11 @@ func play_pause_click():
 	if current_game_state == GameState.LEVEL_START or current_game_state == GameState.LEVEL_PAUSED:
 		# clicked play button to begin the simulation!
 		current_game_state = GameState.LEVEL_RUNNING
-		get_tree().paused = false
+		current_level.set_game_state(current_game_state)
 	elif current_game_state == GameState.LEVEL_RUNNING:
 		# clicked pause button to pause the simulation
 		current_game_state = GameState.LEVEL_PAUSED
-		get_tree().paused = true
+		current_level.set_game_state(current_game_state)
 	else:
 		print('hi')
 
@@ -59,8 +53,8 @@ func _process(delta):
 	
 	if current_level != null:
 		# this null check shouldn't be necessary 
-		assert(current_level.get_node("NextLevel") != null)
-		if current_level.get_node("NextLevel").completed:
+		#var next_level_node = current_level.get_node("NextLevel")
+		if current_level.is_completed():
 			var next_level_idx = current_level_idx + 1
 			if next_level_idx >= LEVELS.size():
 				# but really, got to make an end-state

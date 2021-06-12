@@ -1,0 +1,6 @@
+enum {
+	LEVEL_START,
+	LEVEL_RUNNING,
+	LEVEL_PAUSED,
+	DEATH,
+}

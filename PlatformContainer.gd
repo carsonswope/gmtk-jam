@@ -51,6 +51,16 @@ func add_colliders(x : int, y : int, id : int):
 			rect_collision.position = rect_pos
 			$body.add_child(rect_collision)
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func coords_in_platform(mouse_position):
+	for c in $body.get_children():
+		var c_pos = position + $body.position + c.position
+		if c.shape is CircleShape2D:
+			var dist = sqrt((c_pos - mouse_position).dot(c_pos - mouse_position))
+			if dist <= c.shape.radius:
+				return true
+		elif c.shape is RectangleShape2D:
+			# TODO
+			# (some small edges of the platform are missed if we dont check rectangles too)
+			pass
+
+	return false
