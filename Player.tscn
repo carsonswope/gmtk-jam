@@ -38,6 +38,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "walk"
+frame = 3
 
 [node name="Hat" type="Sprite" parent="."]
 position = Vector2( 0, -20 )
