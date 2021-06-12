@@ -93,13 +93,15 @@
 script = ExtResource( 1 )
 
 [node name="tiles" type="TileMap" parent="."]
+mode = 2
 tile_set = SubResource( 2 )
 cell_size = Vector2( 40, 40 )
+cell_quadrant_size = 40
+cell_custom_transform = Transform2D( 40, 0, 0, 40, 0, 0 )
 centered_textures = true
 format = 1
 
 [node name="body" type="RigidBody2D" parent="."]
-mode = 1
 __meta__ = {
 "_editor_description_": ""
 }
