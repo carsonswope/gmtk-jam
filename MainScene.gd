@@ -34,22 +34,25 @@ func init_level(level_idx):
 func _ready():
 	MusicController.play_music()
 
-	$gui_root/play_pause_button.connect("button_down", self, "play_pause_click")
+	$gui_root/play_pause_button.connect("button_up", self, "play_pause_click")
+	$gui_root/reset_button.connect("button_up", self, "reset_click")
 
 	init_level(0)
 	
 func play_pause_click():
-	if current_game_state == GameState.LEVEL_START:
+	if current_game_state == GameState.LEVEL_START or current_game_state == GameState.LEVEL_PAUSED:
 		# clicked play button to begin the simulation!
 		current_game_state = GameState.LEVEL_RUNNING
 		get_tree().paused = false
 	elif current_game_state == GameState.LEVEL_RUNNING:
 		# clicked pause button to pause the simulation
-		current_game_state = GameState.LEVEL_START
+		current_game_state = GameState.LEVEL_PAUSED
 		get_tree().paused = true
 	else:
 		print('hi')
 
+func reset_click():
+	init_level(current_level_idx)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -66,8 +69,10 @@ func _process(delta):
 				print('advanced to next level!')
 				init_level(next_level_idx)
 	
+	$gui_root/reset_button.disabled = current_game_state == GameState.LEVEL_START
+	
 	$gui_root/level_label.set_text('Current level: ' + str(current_level_idx))
-	if current_game_state == GameState.LEVEL_START:
+	if current_game_state == GameState.LEVEL_START or current_game_state == GameState.LEVEL_PAUSED:
 		$gui_root/play_pause_button.set_text('>')
 	elif current_game_state == GameState.LEVEL_RUNNING:
 		$gui_root/play_pause_button.set_text('||')

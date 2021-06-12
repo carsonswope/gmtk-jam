@@ -20,6 +20,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="reset_button" type="Button" parent="gui_root"]
+pause_mode = 2
+margin_left = 40.0
+margin_top = 24.0
+margin_right = 64.0
+margin_bottom = 48.0
+text = "[ ]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="level_label" type="RichTextLabel" parent="gui_root"]
 margin_right = 160.0
 margin_bottom = 16.0
