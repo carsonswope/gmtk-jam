@@ -11,7 +11,7 @@
 [ext_resource path="res://resources/sprites/hat.png" type="Texture" id=9]
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 20.0
+radius = 19.0
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
