@@ -58,9 +58,15 @@ position = Vector2( 260, 220 )
 [node name="Node2D16" parent="." instance=ExtResource( 4 )]
 position = Vector2( 20, 220 )
 
-[node name="Node2D" parent="." instance=ExtResource( 5 )]
+[node name="Platform 1" parent="." instance=ExtResource( 5 )]
 
-[node name="tiles" parent="Node2D" index="0"]
-tile_data = PoolIntArray( 196622, 0, 0, 196623, 4, 0, 196624, 4, 0, 196625, 4, 0, 196626, 2, 0 )
+[node name="tiles" parent="Platform 1" index="0"]
+tile_data = PoolIntArray( 131074, 0, 0, 131075, 4, 0, 131076, 4, 0, 131077, 2, 0 )
 
-[editable path="Node2D"]
+[node name="Platform 2" parent="." instance=ExtResource( 5 )]
+
+[node name="tiles" parent="Platform 2" index="0"]
+tile_data = PoolIntArray( 262149, 0, 0, 262150, 4, 0, 262151, 4, 0, 262152, 4, 0, 262153, 4, 0, 262154, 4, 0, 262155, 4, 0, 262156, 4, 0, 262157, 4, 0, 262158, 4, 0, 262159, 4, 0, 262160, 4, 0, 262161, 4, 0, 262162, 2, 0 )
+
+[editable path="Platform 1"]
+[editable path="Platform 2"]
