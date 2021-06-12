@@ -118,7 +118,7 @@ func reset_click():
 	init_level(current_level_idx)
 
 func new_pin_click():
-	current_level.place_new_pin()
+	current_level.placing_pin = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -127,8 +127,11 @@ func _process(delta):
 	if current_level != null:
 		if current_level.player_out_of_bounds():
 			# reset
+			var platform_placements = current_level.get_initial_platform_placements()
+			var pin_placements = current_level.get_initial_pin_placements()
 			init_level(current_level_idx)
-			
+			current_level.place_platforms(platform_placements)
+			current_level.place_pins(pin_placements)
 		# this null check shouldn't be necessary 
 		#var next_level_node = current_level.get_node("NextLevel")
 		elif current_level.is_completed():
