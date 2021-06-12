@@ -14,7 +14,7 @@ script = ExtResource( 2 )
 position = Vector2( 865, 120 )
 
 [node name="NextLevel" parent="." instance=ExtResource( 3 )]
-position = Vector2( 865, 480 )
+position = Vector2( 700, 460 )
 
 [node name="Node2D2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 740, 220 )
