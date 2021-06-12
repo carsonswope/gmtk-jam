@@ -101,6 +101,7 @@ func place_pin(pos, initial_position=Vector2(0, 0)):
 	placed_pins.append(pin)
 	placing_pin = false
 	placing_pin_original_position = null
+	placing_pin_icon.position = Vector2(-20, -20)
 
 
 func pin_clicked(mouse_position):
@@ -109,6 +110,9 @@ func pin_clicked(mouse_position):
 		if sqrt((pin.position - mouse_position).dot(pin.position - mouse_position)) < 10:
 			return i
 	return -1
+
+func get_platforms():
+	return get_tree().get_nodes_in_group("PlatformContainers")
 
 func _unhandled_input(e):
 	# only concerned with mouse clicks..
@@ -127,7 +131,34 @@ func _unhandled_input(e):
 				init_position = mouse_position
 			else:
 				init_position = placing_pin_init_position
+				
+			# need to see if the pin is on a hole!
+			var joint_setup = null
+			for p in get_platforms():
+				var hole_coords = p.coords_in_hole(mouse_position)
+				if hole_coords:
+					if init_position == mouse_position:
+						init_position = hole_coords
+					mouse_position = hole_coords
+					
+					# create a joint!
+					joint_setup = [p, hole_coords]
+					
+					#print('hi')
+			
 			place_pin(mouse_position, init_position)
+			
+			if joint_setup:
+				var pin_body = placed_pins[-1]
+				var platform_body = joint_setup[0].get_node("body")
+				var hole_coords = joint_setup[1]
+				
+				var j = PinJoint2D.new()
+				j.position = hole_coords
+				j.node_a = pin_body.get_path()
+				j.node_b = platform_body.get_path()
+				j.disable_collision = true
+				add_child(j)
 		
 		# pickin a pin up..
 		elif pin_clicked(mouse_position) > -1:
@@ -143,7 +174,7 @@ func _unhandled_input(e):
 			# if not currently moving a platform, check to see if the click is on a platform
 			if moving_platform == null:
 				var i = 0
-				var platforms = get_tree().get_nodes_in_group("PlatformContainers")
+				var platforms = get_platforms()
 				clear_moving_platform()
 				for p in platforms:
 					if p.coords_in_platform(mouse_position):
@@ -169,12 +200,12 @@ func _unhandled_input(e):
 			# only reset pin back to original when level is still not moving
 			if placing_pin_original_position and current_game_state == GameState.LEVEL_START:
 				place_pin(placing_pin_original_position)
-					
+
 			else:
 				placing_pin = false
-			
+
 			placing_pin_icon.position = Vector2(-20, -20)
-			
+
 		# right click to 'reset' platform move
 		elif current_game_state == GameState.LEVEL_START:
 			if moving_platform:

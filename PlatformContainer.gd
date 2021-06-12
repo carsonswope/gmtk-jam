@@ -54,6 +54,17 @@ func add_colliders(x : int, y : int, id : int):
 			rect_collision.set_shape(rect_shape)
 			rect_collision.position = rect_pos
 			$body.add_child(rect_collision)
+
+# i.e. see if pin at cord would pin up the platform
+func coords_in_hole(pos):
+	for cell in $tiles.get_used_cells():
+		var id = $tiles.get_cell(cell.x, cell.y)
+		if id == 0 or id == 1 or id == 2: # these are types of tiles with holes in them
+			var cell_center = (Vector2(cell.x + 0.5, cell.y + 0.5) * TILE_SIZE)
+			var diff = cell_center - pos
+			if sqrt(diff.dot(diff)) < 10:
+				return cell_center
+	return null
 	
 func coords_in_platform(mouse_position):
 	for c in $body.get_children():

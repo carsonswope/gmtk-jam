@@ -104,6 +104,7 @@ centered_textures = true
 format = 1
 
 [node name="body" type="RigidBody2D" parent="."]
+can_sleep = false
 __meta__ = {
 "_editor_description_": ""
 }
