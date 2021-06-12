@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://resources/sprites/guy_front.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://resources/sprites/guy/guy_walk_4.png" type="Texture" id=6]
 [ext_resource path="res://resources/sprites/guy/guy_walk_5.png" type="Texture" id=7]
 [ext_resource path="res://resources/sprites/guy/guy_walk_3.png" type="Texture" id=8]
+[ext_resource path="res://resources/sprites/hat.png" type="Texture" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0
@@ -19,10 +20,10 @@ animations = [ {
 "name": "idle",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 4 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "walk",
-"speed": 12.0
+"speed": 15.0
 } ]
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -37,3 +38,8 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "walk"
+
+[node name="Hat" type="Sprite" parent="."]
+position = Vector2( 0, -20 )
+z_index = 1
+texture = ExtResource( 9 )
