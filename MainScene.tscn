@@ -38,3 +38,12 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
+
+[node name="new_pin_button" type="Button" parent="gui_root"]
+margin_left = 80.0
+margin_top = 24.0
+margin_right = 104.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

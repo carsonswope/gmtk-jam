@@ -26,6 +26,7 @@ func _ready():
 	MusicController.play_music()
 	$gui_root/play_pause_button.connect("button_up", self, "play_pause_click")
 	$gui_root/reset_button.connect("button_up", self, "reset_click")
+	$gui_root/new_pin_button.connect("button_up", self, "new_pin_click")
 	init_level(0)
 	
 func play_pause_click():
@@ -43,13 +44,20 @@ func play_pause_click():
 func reset_click():
 	init_level(current_level_idx)
 
+func new_pin_click():
+	current_level.place_new_pin()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
 	if current_level != null:
+		if current_level.player_out_of_bounds():
+			# reset
+			current_game_state = GameState.LEVEL_START
+			current_level.set_game_state(current_game_state)
 		# this null check shouldn't be necessary 
 		#var next_level_node = current_level.get_node("NextLevel")
-		if current_level.is_completed():
+		elif current_level.is_completed():
 			var next_level_idx = current_level_idx + 1
 			if next_level_idx >= LEVELS.size():
 				# but really, got to make an end-state
@@ -57,6 +65,10 @@ func _process(delta):
 			else:
 				print('advanced to next level!')
 				init_level(next_level_idx)
+	
+	var num_unplaced_pins = current_level.num_unplaced_pins()
+	$gui_root/new_pin_button.disabled = num_unplaced_pins == 0
+	$gui_root/new_pin_button.set_text('^ (' + str(num_unplaced_pins) + ')' )
 	
 	$gui_root/reset_button.disabled = current_game_state == GameState.LEVEL_START
 

@@ -11,6 +11,9 @@ var start_body_pos : Vector2
 var start_tiles_pos : Vector2
 var pin_locations = []
 
+var initial_position
+var initial_rotation
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#look for child tiles and instantiate rigidbodies
@@ -26,6 +29,8 @@ func _ready():
 		c.position -= center_of_gravity
 	#center the tile transform on the center of gravity as well
 	$tiles.set_custom_transform(Transform2D(Vector2(TILE_SIZE,0.0),Vector2(0.0,TILE_SIZE),-center_of_gravity))
+	initial_position = $body.position
+	initial_rotation = $body.rotation
 	$tiles.position = $body.position
 	$tiles.rotation = $body.rotation
 
