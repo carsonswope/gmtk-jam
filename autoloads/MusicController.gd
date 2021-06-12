@@ -11,5 +11,6 @@ func _ready():
 	pass # Replace with function body.
 
 func play_music():
-	$Music.stream = main_music
-	$Music.play()
+	if !$Music.playing:
+		$Music.stream = main_music
+		$Music.play()
