@@ -26,6 +26,11 @@ tile_data = PoolIntArray( 327686, 0, 0, 327687, 4, 0, 327688, 2, 0 )
 [node name="tiles" parent="Platform 2" index="0"]
 tile_data = PoolIntArray( 196617, 0, 0, 196618, 4, 0, 196619, 4, 0, 196620, 2, 0 )
 
+[node name="Platform 3" parent="." instance=ExtResource( 5 )]
+
+[node name="tiles" parent="Platform 3" index="0"]
+tile_data = PoolIntArray( 196621, 0, 0, 196622, 4, 0, 196623, 4, 0, 196624, 2, 0 )
+
 [node name="Terrain" parent="." instance=ExtResource( 4 )]
 
 [node name="Terrain" parent="Terrain" index="0"]
@@ -33,4 +38,5 @@ tile_data = PoolIntArray( -262140, 0, 0, -262139, 0, 0, -1, 0, 196609, -65536, 0
 
 [editable path="Platform 1"]
 [editable path="Platform 2"]
+[editable path="Platform 3"]
 [editable path="Terrain"]

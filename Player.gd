@@ -4,9 +4,10 @@ var score : int = 0
 var speed : int = 200
 var jumpForce : int = 600
 var gravity : int = 900
-var floor_angle : float = PI/6.0;
+var floor_angle : float = PI/4.0;
 var vel : Vector2 = Vector2()
 var moving_right : bool = true
+var jump_height : float = 30
 
 onready var sprite : AnimatedSprite = get_node("FullBody/Sprite")
 onready var hat : Sprite = get_node("FullBody/Hat")
@@ -38,7 +39,14 @@ func _physics_process(delta):
 		if hit_floor:
 			body.rotation = -asin(normal.cross(Vector2.UP) / (normal.length() * Vector2.UP.length()))
 		if hit_wall:
-			moving_right = !moving_right
+			if (!hit_floor):
+				normal = Vector2.UP
+			var curr_move_angle = atan2(normal.y,normal.x) + (PI/2 if moving_right else -PI/2)
+			var curr_move_vector = Vector2(sin(curr_move_angle),cos(curr_move_angle))
+			if (!test_move(transform,(curr_move_vector*speed + Vector2.UP * jump_height)*delta)):
+				vel.y -= jump_height
+			else:
+				moving_right = !moving_right
 	else:
 		body.rotation = max(0,abs(body.rotation)-PI/30.0)*sign(body.rotation)
 	
