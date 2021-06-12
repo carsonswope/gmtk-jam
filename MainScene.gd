@@ -22,16 +22,11 @@ func init_level(level_idx):
 	current_game_state = GameState.LEVEL_START
 	current_level.set_game_state(current_game_state)
 
-	
-
-
 func _ready():
 	MusicController.play_music()
-
 	$gui_root/play_pause_button.connect("button_up", self, "play_pause_click")
 	$gui_root/reset_button.connect("button_up", self, "reset_click")
-
-	init_level(1)
+	init_level(0)
 	
 func play_pause_click():
 	if current_game_state == GameState.LEVEL_START or current_game_state == GameState.LEVEL_PAUSED:
@@ -64,7 +59,7 @@ func _process(delta):
 				init_level(next_level_idx)
 	
 	$gui_root/reset_button.disabled = current_game_state == GameState.LEVEL_START
-	
+
 	$gui_root/level_label.set_text('Current level: ' + str(current_level_idx))
 	if current_game_state == GameState.LEVEL_START or current_game_state == GameState.LEVEL_PAUSED:
 		$gui_root/play_pause_button.set_text('>')
