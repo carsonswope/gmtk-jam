@@ -13,4 +13,4 @@ func _ready():
 func play_music():
 	if !$Music.playing:
 		$Music.stream = main_music
-		$Music.play()
+		#$Music.play()
