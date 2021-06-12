@@ -9,24 +9,11 @@ func _ready():
 	var p0 = TilePlatform.instance()
 	add_child(p0)
 	var p0_shape = [
-		'xx  ',
-		'x   ',
-		'xxxx'
+		'xxxxxxxx',
 	]
 	p0.initialize(p0_shape, true)
-	p0.position.y = 0
-	p0.position.x = 0
-	
-	var p1 = TilePlatform.instance()
-	add_child(p1)	
-	var p1_shape = [
-		' xx ',
-		'  x ',
-		'xxxx'
-	]
-	p1.initialize(p1_shape, false)
-	p1.position.y = 350
-	p1.position.x = 200
+	p0.position.y = 50
+	p0.position.x = 300
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

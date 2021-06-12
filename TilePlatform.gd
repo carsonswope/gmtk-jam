@@ -5,7 +5,7 @@ const Tile = preload("res://Tile.tscn")
 const EMPTY_TILE = ' '
 const PLATFORM_TILE = 'x'
 
-const TILE_SIZE = 64
+const TILE_SIZE = 40
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
