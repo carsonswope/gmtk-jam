@@ -7,7 +7,7 @@ var gravity : int = 900
 
 var vel : Vector2 = Vector2()
 
-onready var sprite : Sprite = get_node("Sprite")
+onready var sprite : AnimatedSprite = get_node("Sprite")
 
 func _physics_process(delta):
 	vel.x = 0
@@ -25,6 +25,14 @@ func _physics_process(delta):
 		vel.y -= jumpForce
 	
 	if vel.x < 0:
+		sprite.animation = "walk"
+		sprite.playing = true
 		sprite.flip_h = true
 	elif vel.x > 0:
+		sprite.animation = "walk"
+		sprite.playing = true
 		sprite.flip_h = false
+	else:
+		sprite.animation = "walk"
+		sprite.playing = false
+		sprite.frame = 3
