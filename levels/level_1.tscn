@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/level_1.gd" type="Script" id=2]
 [ext_resource path="res://scripts/NextLevel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://PlatformContainer.tscn" type="PackedScene" id=5]
 
 [node name="level_1" type="Node2D"]
 z_index = -1
@@ -56,3 +57,10 @@ position = Vector2( 260, 220 )
 
 [node name="Node2D16" parent="." instance=ExtResource( 4 )]
 position = Vector2( 20, 220 )
+
+[node name="Node2D" parent="." instance=ExtResource( 5 )]
+
+[node name="tiles" parent="Node2D" index="0"]
+tile_data = PoolIntArray( 131074, 0, 0, 131075, 4, 0, 131076, 4, 0, 131077, 4, 0, 131078, 2, 0, 196622, 0, 0, 196623, 4, 0, 196624, 4, 0, 196625, 4, 0, 196626, 2, 0 )
+
+[editable path="Node2D"]

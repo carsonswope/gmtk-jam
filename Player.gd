@@ -45,12 +45,10 @@ func _physics_process(delta):
 		sprite.animation = "walk"
 		sprite.playing = true
 		sprite.flip_h = true
-		hat.offset = Vector2(-10,0)
 	elif vel.x > 0:
 		sprite.animation = "walk"
 		sprite.playing = true
 		sprite.flip_h = false
-		hat.offset = Vector2(10,0)
 	else:
 		sprite.animation = "walk"
 		sprite.playing = false
