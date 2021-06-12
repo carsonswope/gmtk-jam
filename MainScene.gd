@@ -6,11 +6,12 @@ var NUM_LEVELS = 2
 const GameState = preload("res://GameState.gd")
 
 var session_start_time
-var play_time
+var current_game_state = GameState.LEVEL_START
 
 #stuff to save
-var current_game_state = GameState.LEVEL_START
-var levels_solved = {}
+
+var levels_solved = {} #best pin count, whether the user got a special thing, etc
+var play_time #milliseconds
 
 
 const LEVELS = [
@@ -30,7 +31,6 @@ func load_save():
 			if i == "levels_solved":
 				levels_solved = line_data[i]
 			elif i == "play_time":
-				print("play time: ",line_data[i])
 				play_time = line_data[i]
 	save_game.close()
 

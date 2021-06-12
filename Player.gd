@@ -40,14 +40,12 @@ func _physics_process(delta):
 			body.rotation = -asin(normal.cross(Vector2.UP) / (normal.length() * Vector2.UP.length()))
 		if hit_wall:
 			if !hit_floor:
-				print("not on floor")
 				normal = Vector2.UP
 			var curr_move_angle = atan2(normal.y,normal.x) + (PI/2 if moving_right else -PI/2)
 			var curr_move_vector = Vector2(cos(curr_move_angle),sin(curr_move_angle))
 			var jump_vector = (curr_move_vector*speed) * delta +jump_height * Vector2.UP
 			print (jump_vector)
 			if (!test_move(Transform2D(0.0,position),jump_vector,false)):
-				print (jump_vector)
 				var jump_vel = sqrt(2.0 / 3.0 * jump_height * gravity) # jump to twice the jump height
 				#play jump sound
 				vel.y = -jump_vel
