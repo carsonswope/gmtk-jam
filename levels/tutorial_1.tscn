@@ -107,7 +107,7 @@ __meta__ = {
 }
 
 [node name="tape" type="Sprite" parent="."]
-position = Vector2( 255.739, 358.7 )
+position = Vector2( 275, 355 )
 rotation = -0.354302
 scale = Vector2( 1.00905, 1 )
 texture = ExtResource( 6 )
