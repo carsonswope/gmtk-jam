@@ -77,7 +77,8 @@ func get_initial_platform_placements():
 func get_initial_pin_placements():
 	var ps = []
 	for p in placed_pins:
-		ps.append(p.initial_position)
+		if p.initial_position != Vector2(-1, -1):
+			ps.append(p.initial_position)
 	return ps
 
 func place_platforms(positions):
@@ -93,7 +94,7 @@ func place_pins(positions):
 	for p in positions:
 		place_pin(p, p)
 
-func place_pin(pos, initial_position=Vector2(0, 0)):
+func place_pin(pos, initial_position=Vector2(-1, -1)):
 	
 	# need to see if the pin is on a hole!
 	var joint_setup = null
@@ -120,6 +121,7 @@ func place_pin(pos, initial_position=Vector2(0, 0)):
 		var hole_coords = joint_setup[1]
 		
 		var j = PinJoint2D.new()
+		j.add_to_group("joints")
 		j.position = hole_coords
 		j.node_a = pin_body.get_path()
 		j.node_b = platform_body.get_path()
@@ -150,8 +152,10 @@ func _unhandled_input(e):
 		# putting a pin down..
 		if placing_pin:
 			var init_position
-			if current_game_state == GameState.LEVEL_START or not placing_pin_init_position:
+			if current_game_state == GameState.LEVEL_START:
 				init_position = mouse_position
+			elif not placing_pin_init_position:
+				init_position = Vector2(-1, -1)
 			else:
 				init_position = placing_pin_init_position
 			place_pin(mouse_position, init_position)
@@ -174,11 +178,13 @@ func _unhandled_input(e):
 				clear_moving_platform()
 				for p in platforms:
 					if p.coords_in_platform(mouse_position):
-						moving_platform_idx = i
-						moving_platform = p
-						moving_platform_start_pos = p.position
-						moving_platform_start_mouse_pos = mouse_position
-						return
+						# can't move a platform that already is part of a joint
+						if not has_joint(p):
+							moving_platform_idx = i
+							moving_platform = p
+							moving_platform_start_pos = p.position
+							moving_platform_start_mouse_pos = mouse_position
+							return
 					i += 1
 
 			# currently moving a platform - snap platform to intented position
@@ -195,7 +201,7 @@ func _unhandled_input(e):
 		if placing_pin:
 			# only reset pin back to original when level is still not moving
 			if placing_pin_original_position and current_game_state == GameState.LEVEL_START:
-				place_pin(placing_pin_original_position)
+				place_pin(placing_pin_original_position, placing_pin_original_position)
 
 			else:
 				placing_pin = false
@@ -208,8 +214,29 @@ func _unhandled_input(e):
 				moving_platform.position = moving_platform_start_pos
 				clear_moving_platform()
 
+func has_joint(p):
+	var joints = get_tree().get_nodes_in_group("joints")
+	for j in joints:
+		var p_path = p.get_node("body").get_path()
+		var j_path = j.node_b
+		if j_path == p_path:
+			return true
+	return false
+	#get_tree().get_nodes_in_group("PlatformContainers")
+
+# durr.. just some lazy garbage collection instead of actually keeping track of joints
+func prune_joints():
+	var joints = get_tree().get_nodes_in_group("joints")
+	for j in joints:
+		var pin_path = j.node_a
+		var pin = get_node_or_null(pin_path)
+		if not pin:
+			remove_child(j)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	prune_joints()
 	
 	if placing_pin:
 		placing_pin_icon.position = get_viewport().get_mouse_position()
