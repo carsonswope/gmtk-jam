@@ -2,7 +2,6 @@ extends Node2D
 
 var current_level_idx = -1
 var current_level = null
-var NUM_LEVELS = 2
 const GameState = preload("res://GameState.gd")
 
 var session_start_time
@@ -17,7 +16,11 @@ var play_time = 0 #milliseconds
 const LEVELS = [
 	preload("res://levels/level_1.tscn"),
 	preload("res://levels/level_2.tscn"),
+	preload("res://levels/level_3.tscn"),
+	preload("res://levels/level_4.tscn"),
+	preload("res://levels/level_5.tscn")
 ]
+var NUM_LEVELS = LEVELS.size()
 
 func load_save():
 	var save_game = File.new()
