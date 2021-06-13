@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/birthofalargeboy_80.ogg-611b1b760d82b25ac3651981d654b9e0.oggstr"
+
+[deps]
+
+source_file="res://resources/music/Mastered OST Oggs/birthofalargeboy_80.ogg"
+dest_files=[ "res://.import/birthofalargeboy_80.ogg-611b1b760d82b25ac3651981d654b9e0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

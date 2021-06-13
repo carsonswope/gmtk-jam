@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/specialzone_80.ogg-4d93625a8ba30981fafad02e69f53b02.oggstr"
+
+[deps]
+
+source_file="res://resources/music/Mastered OST Oggs/specialzone_80.ogg"
+dest_files=[ "res://.import/specialzone_80.ogg-4d93625a8ba30981fafad02e69f53b02.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
