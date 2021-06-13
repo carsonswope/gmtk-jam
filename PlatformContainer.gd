@@ -37,7 +37,6 @@ func _ready():
 func update_label_if_exists():
 	var label_node = get_node_or_null("Label")
 	if (label_node != null):
-		print("found label")
 		var unit_x = Vector2(cos($body.rotation),sin($body.rotation))
 		var unit_y = Vector2(-sin($body.rotation),cos($body.rotation))
 		label_node.rect_position = $body.position - label_node.rect_size.x/2 * unit_x - label_node.rect_size.y/2 * unit_y

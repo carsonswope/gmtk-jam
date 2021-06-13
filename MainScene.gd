@@ -92,7 +92,7 @@ func play_pause_click():
 func toggle_game_gui_visibility(visible : bool):
 	for item in [$gui_root/level_label,$gui_root/new_pin_button,		
 	$gui_root/play_pause_button, $gui_root/reset_button,		
-	$gui_root/reset_soft_button]:
+	$gui_root/reset_soft_button, $gui_root/new_pin_counter]:
 		item.visible = visible
 
 func init_main_menu():
@@ -158,14 +158,14 @@ func _process(delta):
 	
 	var num_unplaced_pins = current_level.num_unplaced_pins()
 	$gui_root/new_pin_button.disabled = num_unplaced_pins == 0
-	$gui_root/new_pin_button.set_text('^ (' + str(num_unplaced_pins) + ')' )
+	$gui_root/new_pin_counter.set_text('x(' + str(num_unplaced_pins) +')')
 	
 	$gui_root/reset_soft_button.disabled = current_game_state == GameState.LEVEL_START
 
-	$gui_root/level_label.set_text('Current level: ' + str(current_level_idx))
+	$gui_root/level_label.set_text('Level ' + str(current_level_idx))
 	if current_game_state == GameState.LEVEL_START or current_game_state == GameState.LEVEL_PAUSED:
-		$gui_root/play_pause_button.set_text('>')
+		$gui_root/play_pause_button.set_text('play')
 	elif current_game_state == GameState.LEVEL_RUNNING:
-		$gui_root/play_pause_button.set_text('||')
+		$gui_root/play_pause_button.set_text('pause')
 	else:
 		print('huh?')
