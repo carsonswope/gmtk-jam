@@ -22,6 +22,7 @@ const LEVELS = [
 	preload("res://levels/tutorial_2.tscn"),
 	preload("res://levels/tutorial_3.tscn"),
 	preload("res://levels/tutorial_4.tscn"),
+	preload("res://levels/level_1.tscn"),
 	preload("res://levels/level_2.tscn"),
 	preload("res://levels/level_3.tscn"),
 	preload("res://levels/level_4.tscn"),
