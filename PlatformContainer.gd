@@ -3,7 +3,9 @@ extends Node2D
 const TILE_SIZE = 40
 #a string "0101" would describe a square curved on the top right and bottom right
 const corners = ["1010","0000","0101",		
-"1010","0000","0101"]
+"1010","0000","0101",		
+"1100","0000","0011",		
+"1100","0000","0011"]
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -69,7 +71,7 @@ func add_colliders(x : int, y : int, id : int):
 func coords_in_hole(pos):
 	for cell in $tiles.get_used_cells():
 		var id = $tiles.get_cell(cell.x, cell.y)
-		if id == 0 or id == 1 or id == 2: # these are types of tiles with holes in them
+		if id in [0,1,2,6,7,8]: # these are types of tiles with holes in them
 			var base_pos = $body.position
 			var unit_x = Vector2(cos($body.rotation),sin($body.rotation))
 			var unit_y = Vector2(-sin($body.rotation),cos($body.rotation))

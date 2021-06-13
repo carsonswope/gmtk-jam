@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var score : int = 0
-var speed : int = 200
+var speed : int = 180
 var jumpForce : int = 600
 var gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var floor_angle : float = PI/6.0;
