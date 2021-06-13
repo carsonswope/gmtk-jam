@@ -71,10 +71,11 @@ __meta__ = {
 }
 
 [node name="Label2" type="Label" parent="."]
-margin_left = 80.0
-margin_top = 200.0
-margin_right = 448.0
-margin_bottom = 240.0
+margin_left = 73.6505
+margin_top = 188.888
+margin_right = 441.65
+margin_bottom = 245.888
+rect_pivot_offset = Vector2( 336.315, 83.6927 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "You have beaten the game, and in doing so 
@@ -83,8 +84,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label3" type="Label" parent="."]
+margin_left = 99.0
+margin_top = 486.0
+margin_right = 551.0
+margin_bottom = 543.0
+rect_pivot_offset = Vector2( 336.315, 83.6927 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Programming and art by Carson and Trevor Swope
+Music and sound effects by Madison Butler"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="walrus" type="Sprite" parent="."]
-position = Vector2( 296, 400 )
+position = Vector2( 249.965, 365.077 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
