@@ -46,7 +46,7 @@ func update_label_if_exists():
 		label_node.rect_position = $body.position - label_node.rect_size.x/2 * unit_x - label_node.rect_size.y/2 * unit_y
 		label_node.rect_rotation = $body.rotation_degrees
 
-func _process(delta):
+func _physics_process(delta):
 	$tiles.position = $body.position
 	$tiles.rotation = $body.rotation
 	update_label_if_exists()

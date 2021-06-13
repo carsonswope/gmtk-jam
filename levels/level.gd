@@ -296,13 +296,16 @@ func _process(delta):
 	
 	prune_joints()
 	
-	if placing_pin:
-		var placing_pin_pos = get_viewport().get_mouse_position()
-		var eligible = pin_eligible(placing_pin_pos)
-		placing_pin_icon.position = eligible if eligible else placing_pin_pos
-		placing_pin_icon.get_child(1).modulate = Color(1,1,1,0.4) if eligible else Color(1,0,0,0.2)
+	
 	
 	if current_game_state == GameState.LEVEL_START:
 		if moving_platform:
 			var mouse_pos = get_viewport().get_mouse_position()
 			moving_platform.position = moving_platform_start_pos + (mouse_pos - moving_platform_start_mouse_pos)
+
+func _physics_process(delta):
+	if placing_pin:
+		var placing_pin_pos = get_viewport().get_mouse_position()
+		var eligible = pin_eligible(placing_pin_pos)
+		placing_pin_icon.position = eligible if eligible else placing_pin_pos
+		placing_pin_icon.get_child(1).modulate = Color(1,1,1,0.4) if eligible else Color(1,0,0,0.2)
