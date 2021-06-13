@@ -83,15 +83,10 @@ func coords_in_hole(pos):
 	return null
 	
 func coords_in_platform(mouse_position):
+	var mouse_circle = CircleShape2D.new()
+	mouse_circle.set_radius(2)
 	for c in $body.get_children():
-		var c_pos = position + $body.position + c.position
-		if c.shape is CircleShape2D:
-			var dist = sqrt((c_pos - mouse_position).dot(c_pos - mouse_position))
-			if dist <= c.shape.radius:
-				return true
-		elif c.shape is RectangleShape2D:
-			# TODO
-			# (some small edges of the platform are missed if we dont check rectangles too)
-			pass
+		if c.shape.collide(c.transform,mouse_circle,Transform2D(0.0,position + $body.position-mouse_position)):
+			return true
 
 	return false
