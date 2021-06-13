@@ -7,8 +7,9 @@ var gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var floor_angle : float = PI/6.0;
 var vel : Vector2 = Vector2()
 var moving_right : bool = true
-var jump_height : float = 20
+var jump_height : float = 40
 
+var time_til_next_jump = null
 onready var sprite : AnimatedSprite = get_node("FullBody/Sprite")
 onready var hat : Sprite = get_node("FullBody/Hat")
 onready var body: Node2D = get_node("FullBody")
@@ -17,6 +18,11 @@ func _ready():
 	hat.offset = Vector2(-10 if sprite.flip_h else 10, 0.0)
 
 func _physics_process(delta):
+	if time_til_next_jump:
+		time_til_next_jump -= delta
+		if time_til_next_jump <0:
+			time_til_next_jump = null
+	
 	vel.x = 0
 	
 	vel.x += speed if moving_right else -speed
@@ -42,11 +48,14 @@ func _physics_process(delta):
 			normal = Vector2.UP
 			var curr_move_angle = atan2(normal.y,normal.x) + (PI/2 if moving_right else -PI/2)
 			var curr_move_vector = Vector2(cos(curr_move_angle),sin(curr_move_angle))
-			var jump_vel = sqrt(2.0 / 3.0 * jump_height * gravity)
-			var jump_vector = Vector2(curr_move_vector.x*speed,jump_vel) * delta
+			var jump_vel = sqrt(4.0 / 3.0 * jump_height * gravity)
+			print (jump_vel)
+			var jump_vector = Vector2(curr_move_vector.x*speed * jump_vel/gravity,-jump_vel).normalized()*40
 			print (jump_vector)
-			if (!test_move(Transform2D(0.0,position),jump_vector,false)):
+			if (!time_til_next_jump and !test_move(Transform2D(0.0,position + jump_vector),Vector2(0,0),false)):
+				time_til_next_jump = 0.5
 				#play jump sound
+				print ("jumping")
 				vel.y = -jump_vel
 			else:
 				moving_right = !moving_right
