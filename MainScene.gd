@@ -165,7 +165,7 @@ func _process(delta):
 	
 	$gui_root/reset_soft_button.disabled = current_game_state == GameState.LEVEL_START
 
-	$gui_root/level_label.set_text('Level ' + str(current_level_idx))
+	$gui_root/level_label.set_text('Level ' + str(current_level_idx+1))
 	if current_game_state == GameState.LEVEL_START or current_game_state == GameState.LEVEL_PAUSED:
 		$gui_root/play_pause_button.set_text('play')
 	elif current_game_state == GameState.LEVEL_RUNNING:
