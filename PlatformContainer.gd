@@ -67,7 +67,7 @@ func coords_in_hole(pos):
 			var tile_origin = base_pos - (initial_position.x * unit_x + initial_position.y * unit_y)
 			print(tile_origin)
 			var pre_transform = (Vector2(cell.x + 0.5, cell.y + 0.5) * TILE_SIZE)
-			var cell_center = tile_origin + (pre_transform.x * unit_x + pre_transform.y * unit_y)
+			var cell_center = position + tile_origin + (pre_transform.x * unit_x + pre_transform.y * unit_y)
 			var diff = cell_center - pos
 			if sqrt(diff.dot(diff)) < 10:
 				return cell_center
