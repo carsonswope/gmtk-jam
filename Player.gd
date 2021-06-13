@@ -40,7 +40,7 @@ func _physics_process(delta):
 			var this_normal = this_collision.normal
 			if (this_collision.collider.get_parent().is_in_group("PlatformContainers")):
 				var offset = this_collision.position - this_collision.collider.position
-				this_collision.collider.apply_impulse(offset, -this_normal * 10)
+				this_collision.collider.apply_impulse(offset, -this_normal * 20)
 			
 			if abs(asin(this_normal.cross(Vector2.UP))) / (this_normal.length() * Vector2.UP.length()) <= (floor_angle): #ignore steeper slopes
 				hit_floor = true
