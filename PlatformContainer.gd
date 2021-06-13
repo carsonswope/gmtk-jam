@@ -101,6 +101,14 @@ func would_overlap_with_other_pin_in_position(pin, pos):
 			return true
 	return false
 
+func would_overlap_with_other_cell_pos_in_position(cell_pos, pos):
+	var cell_shape = RectangleShape2D.new()
+	cell_shape.set_extents(Vector2(3, 3))
+	for c in $body.get_children():
+		if c.shape.collide(c.transform.translated(position + $body.position),cell_shape,Transform2D(0.0, cell_pos)):
+			return true
+	return false
+
 func would_overlap_with_other_platform_in_position(other, pos):
 	for c in $body.get_children():
 		var c_tf = c.transform.translated(pos + $body.position)

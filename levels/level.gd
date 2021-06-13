@@ -216,6 +216,21 @@ func _unhandled_input(e):
 							ineligible = true
 							break
 				
+				# no, okay the, would it overlap the terrain?
+				if not ineligible:
+					var terrain = $layout/Terrain/Terrain
+					#terrain.
+					#terrain.get_
+					for cell in terrain.get_used_cells():
+						#var id = terrain.get_cell(cell.x, cell.y)
+						#print(id)
+						var cell_pos = terrain.map_to_world(cell) + Vector2(20, 20)
+						#var cell_pos = Vector2(cell.x + 0.5, cell.y + 0.5) * 40 # TILE_SIZE :)
+						if moving_platform.would_overlap_with_other_cell_pos_in_position(cell_pos, new_platform_position):
+							ineligible = true
+							break
+						#var id = terrain.get_cell(cell.x, cell.y)
+				
 				if ineligible:
 					moving_platform.position = moving_platform_start_pos
 				else:
