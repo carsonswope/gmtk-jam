@@ -49,6 +49,7 @@ func update_label_if_exists():
 func _physics_process(delta):
 	$tiles.position = $body.position
 	$tiles.rotation = $body.rotation
+	
 	update_label_if_exists()
 		
 func add_colliders(x : int, y : int, id : int):

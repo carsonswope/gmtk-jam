@@ -442,6 +442,7 @@ format = 1
 
 [node name="body" type="RigidBody2D" parent="."]
 collision_mask = 3
+contact_monitor = true
 can_sleep = false
 __meta__ = {
 "_editor_description_": ""

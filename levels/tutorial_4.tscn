@@ -49,11 +49,6 @@ position = Vector2( 45.9228, 233.437 )
 [node name="NextLevel" parent="layout" instance=ExtResource( 2 )]
 position = Vector2( 744.124, 409.66 )
 
-[node name="Platform 1" parent="layout" instance=ExtResource( 4 )]
-
-[node name="tiles" parent="layout/Platform 1" index="0"]
-tile_data = PoolIntArray( 131091, 6, 0, 196627, 10, 0, 262163, 11, 0 )
-
 [node name="Platform 2" parent="layout" instance=ExtResource( 4 )]
 
 [node name="tiles" parent="layout/Platform 2" index="0"]
@@ -111,6 +106,11 @@ scale = Vector2( 0.815816, 1 )
 texture = ExtResource( 6 )
 offset = Vector2( -61.5775, -19.9999 )
 
-[editable path="layout/Platform 1"]
+[node name="Platform2" parent="." instance=ExtResource( 4 )]
+
+[node name="tiles" parent="Platform2" index="0"]
+tile_data = PoolIntArray( 196626, 6, 0, 262162, 10, 0, 327698, 11, 0 )
+
 [editable path="layout/Platform 2"]
 [editable path="layout/Terrain"]
+[editable path="Platform2"]

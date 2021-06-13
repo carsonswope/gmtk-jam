@@ -36,7 +36,14 @@ func _physics_process(delta):
 	if get_slide_count() > 0:
 		var normal = Vector2(0.0,0.0)
 		for i in range(0,get_slide_count()):
-			var this_normal = get_slide_collision(i).normal
+			var this_collision = get_slide_collision(i)
+			var this_normal = this_collision.normal
+			if (this_collision.collider.get_parent().is_in_group("PlatformContainers")):
+				print ("collision with platform, normal=",this_normal," position=",this_collision.position)
+				var offset = this_collision.position - this_collision.collider.position
+				print("offset=",offset)
+				this_collision.collider.apply_impulse(offset, -this_normal * 10)
+			
 			if abs(asin(this_normal.cross(Vector2.UP))) / (this_normal.length() * Vector2.UP.length()) <= (floor_angle): #ignore steeper slopes
 				hit_floor = true
 				normal = normal + this_normal
