@@ -66,7 +66,7 @@ func _ready():
 	$gui_root/play_pause_button.connect("button_up", self, "play_pause_click")
 	$gui_root/reset_button.connect("button_up", self, "reset_click")
 	$gui_root/new_pin_button.connect("button_up", self, "new_pin_click")
-	reset_save()
+	#reset_save()
 	load_save()
 	session_start_time = OS.get_ticks_msec()
 	init_main_menu()
@@ -98,7 +98,7 @@ func init_main_menu():
 		var level_button = Button.new()
 		level_button.text = String(i+1)
 		level_button.margin_left = i * 40
-		level_button.disabled = false if i==0 else !levels_solved[String(i)][0]
+		level_button.disabled = false if i==0 else !levels_solved[String(i-1)][0]
 		level_button.connect("button_up", self, "_on_level_click", [i])
 		$menu_gui_root.add_child(level_button)
 		

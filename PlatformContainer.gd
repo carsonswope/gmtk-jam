@@ -32,10 +32,21 @@ func _ready():
 	initial_rotation = $body.rotation
 	$tiles.position = $body.position
 	$tiles.rotation = $body.rotation
+	update_label_if_exists()
+
+func update_label_if_exists():
+	var label_node = get_node_or_null("Label")
+	if (label_node != null):
+		print("found label")
+		var unit_x = Vector2(cos($body.rotation),sin($body.rotation))
+		var unit_y = Vector2(-sin($body.rotation),cos($body.rotation))
+		label_node.rect_position = $body.position - label_node.rect_size.x/2 * unit_x - label_node.rect_size.y/2 * unit_y
+		label_node.rect_rotation = $body.rotation_degrees
 
 func _process(delta):
 	$tiles.position = $body.position
 	$tiles.rotation = $body.rotation
+	update_label_if_exists()
 		
 func add_colliders(x : int, y : int, id : int):
 	var base_pos = $body.position + Vector2(x + 0.5, y + 0.5) * TILE_SIZE
