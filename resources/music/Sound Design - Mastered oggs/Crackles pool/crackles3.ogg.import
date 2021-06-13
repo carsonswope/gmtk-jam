@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/crackles3.ogg-1befcff0b9cc505f89ef99448c2117e6.oggstr"
+
+[deps]
+
+source_file="res://resources/music/Sound Design - Mastered oggs/Crackles pool/crackles3.ogg"
+dest_files=[ "res://.import/crackles3.ogg-1befcff0b9cc505f89ef99448c2117e6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
