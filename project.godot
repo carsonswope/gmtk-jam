@@ -18,6 +18,10 @@ config/icon="res://icon.png"
 
 MusicController="*res://autoloads/MusicController.tscn"
 
+[display]
+
+window/size/width=1000
+
 [input]
 
 move_left={
