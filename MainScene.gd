@@ -18,7 +18,10 @@ var play_time = 0 #milliseconds
 
 
 const LEVELS = [
-	preload("res://levels/level_1.tscn"),
+	preload("res://levels/tutorial_1.tscn"),
+	preload("res://levels/tutorial_2.tscn"),
+	preload("res://levels/tutorial_3.tscn"),
+	preload("res://levels/tutorial_4.tscn"),
 	preload("res://levels/level_2.tscn"),
 	preload("res://levels/level_3.tscn"),
 	preload("res://levels/level_4.tscn"),
