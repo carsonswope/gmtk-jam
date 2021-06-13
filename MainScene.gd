@@ -132,10 +132,6 @@ func init_main_menu():
 		var x_portion = float(i % choice + 1) /((float(choice) if (best == 0 or y < rows-1) else remainder)+1) 
 		level_button.margin_left = projectResolution.x * x_portion
 		level_button.margin_top = projectResolution.y * y_portion
-#		level_button.anchor_bottom = 0.5
-#		level_button.anchor_right = 0.5
-#		level_button.anchor_left = 0.5
-#		level_button.anchor_top = 0.5
 		level_button.add_font_override("font",normal_font)
 		level_button.disabled = false if (i==0 or OS.is_debug_build()) else !levels_solved[String(i-1)][0]
 		level_button.connect("button_up", self, "_on_level_click", [i])
@@ -189,6 +185,7 @@ func _process(delta):
 		#var next_level_node = current_level.get_node("NextLevel")
 		elif current_level.is_completed():
 			levels_solved[String(current_level_idx)] = [true,1]
+			save_game()
 			var next_level_idx = current_level_idx + 1
 			if next_level_idx >= LEVELS.size():
 				# but really, got to make an end-state
