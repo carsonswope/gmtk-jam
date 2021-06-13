@@ -7,7 +7,7 @@ const PinMoving = preload("res://PinMoving.tscn")
 
 
 export var num_placeable_pins = 2
-
+export var level_music : String = ""
 #var init_placed_pins_positions = []
 var placed_pins = []
 var placed_platform_positions = []
@@ -40,6 +40,7 @@ func _ready():
 	add_child(placing_pin_icon)
 	placing_pin_icon.position = Vector2(-100, -100)
 	placing_pin_icon.z_index = 10
+	MusicController.play_music(level_music)
 	
 
 func is_completed():
