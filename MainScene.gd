@@ -90,7 +90,9 @@ func play_pause_click():
 		print('hi')
 
 func toggle_game_gui_visibility(visible : bool):
-	for item in [$gui_root/level_label, $gui_root/new_pin_button, $gui_root/play_pause_button, $gui_root/reset_button]:
+	for item in [$gui_root/level_label,$gui_root/new_pin_button,		
+	$gui_root/play_pause_button, $gui_root/reset_button,		
+	$gui_root/reset_soft_button]:
 		item.visible = visible
 
 func init_main_menu():
