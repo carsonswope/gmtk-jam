@@ -7,6 +7,7 @@ const GameState = preload("res://GameState.gd")
 var session_start_time
 var current_game_state = GameState.MAIN_MENU
 
+var gamejam_tex = preload("res://resources/sprites/gamejam.png")
 var normal_font = preload("res://resources/fonts/main_font.tres")
 var title_font = preload("res://resources/fonts/title.tres")
 
@@ -74,6 +75,7 @@ func _ready():
 	$gui_root/new_pin_button.connect("button_up", self, "new_pin_click")
 	#reset_save()
 	$gui_root/reset_soft_button.connect("button_up", self, "reset_soft_click")
+	$gui_root/quit_button.connect("button_up", self, "return_to_main_menu")
 	load_save()
 	session_start_time = OS.get_ticks_msec()
 	init_main_menu()
@@ -98,7 +100,8 @@ func play_pause_click():
 func toggle_game_gui_visibility(visible : bool):
 	for item in [$gui_root/level_label,$gui_root/new_pin_button,		
 	$gui_root/play_pause_button, $gui_root/reset_button,		
-	$gui_root/reset_soft_button, $gui_root/new_pin_counter]:
+	$gui_root/reset_soft_button, $gui_root/new_pin_counter,		
+	$gui_root/quit_button]:
 		item.visible = visible
 
 func init_main_menu():
@@ -120,7 +123,7 @@ func init_main_menu():
 	var rows = int(ceil(float(NUM_LEVELS)/float(choice)))
 	var projectResolution=OS.get_window_size()
 	for i in NUM_LEVELS:
-		var level_button = Button.new()
+		var level_button = ToolButton.new()
 		level_button.text = String(i+1)
 		var y = ceil(float(i / choice))
 		var y_portion = (y+1)/float(rows+1)
@@ -145,7 +148,8 @@ func init_main_menu():
 
 func _on_level_click(lvl_idx):
 	if (init_level(lvl_idx)):
-		$menu_gui_root.queue_free()
+		for child in $menu_gui_root.get_children():
+			$menu_gui_root.remove_child(child)
 
 func return_to_main_menu():
 	if current_level:
