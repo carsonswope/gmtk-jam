@@ -39,6 +39,7 @@ pause_mode = 2
 z_index = -1
 script = ExtResource( 7 )
 num_placeable_pins = 1
+level_music = "bigbad"
 
 [node name="layout" type="Node2D" parent="."]
 pause_mode = 1

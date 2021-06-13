@@ -38,6 +38,7 @@
 pause_mode = 2
 z_index = -1
 script = ExtResource( 2 )
+level_music = "percolating"
 
 [node name="layout" type="Node2D" parent="."]
 pause_mode = 1

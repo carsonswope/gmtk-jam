@@ -36,6 +36,7 @@
 [node name="level_6" type="Node2D"]
 script = ExtResource( 2 )
 num_placeable_pins = 1
+level_music = "specialzone"
 
 [node name="layout" type="Node2D" parent="."]
 pause_mode = 1

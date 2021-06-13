@@ -34,6 +34,7 @@
 
 [node name="level_3" type="Node2D"]
 script = ExtResource( 2 )
+level_music = "eight"
 
 [node name="layout" type="Node2D" parent="."]
 pause_mode = 1
