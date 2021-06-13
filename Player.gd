@@ -42,10 +42,10 @@ func _physics_process(delta):
 			normal = Vector2.UP
 			var curr_move_angle = atan2(normal.y,normal.x) + (PI/2 if moving_right else -PI/2)
 			var curr_move_vector = Vector2(cos(curr_move_angle),sin(curr_move_angle))
-			var jump_vector = (curr_move_vector*speed) * delta +jump_height * Vector2.UP
+			var jump_vel = sqrt(2.0 / 3.0 * jump_height * gravity)
+			var jump_vector = Vector2(curr_move_vector.x*speed,jump_vel) * delta
 			print (jump_vector)
 			if (!test_move(Transform2D(0.0,position),jump_vector,false)):
-				var jump_vel = sqrt(2.0 / 3.0 * jump_height * gravity) # jump to twice the jump height
 				#play jump sound
 				vel.y = -jump_vel
 			else:
