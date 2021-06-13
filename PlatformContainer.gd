@@ -86,13 +86,18 @@ func coords_in_hole(pos):
 				return cell_center
 	return null
 	
-func coords_in_platform(mouse_position):
-	var mouse_circle = CircleShape2D.new()
-	mouse_circle.set_radius(2)
-	for c in $body.get_children():
-		if c.shape.collide(c.transform,mouse_circle,Transform2D(0.0,position + $body.position-mouse_position)):
-			return true
-	return false
+func coords_in_platform(pos):
+	for cell in $tiles.get_used_cells():
+		var base_pos = $body.position
+		var unit_x = Vector2(cos($body.rotation),sin($body.rotation))
+		var unit_y = Vector2(-sin($body.rotation),cos($body.rotation))
+		var tile_origin = base_pos - (initial_position.x * unit_x + initial_position.y * unit_y)
+		var pre_transform = (Vector2(cell.x + 0.5, cell.y + 0.5) * TILE_SIZE)
+		var cell_center = position + tile_origin + (pre_transform.x * unit_x + pre_transform.y * unit_y)
+		var diff = cell_center - pos
+		if sqrt(diff.dot(diff)) < 20:
+			return cell_center
+	return null
 
 func would_overlap_with_other_pin_in_position(pin, pos):
 	var pin_circle = CircleShape2D.new()
