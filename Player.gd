@@ -50,6 +50,9 @@ func _physics_process(delta):
 				hit_wall = true
 		if hit_floor:
 			body.rotation = -asin(normal.cross(Vector2.UP) / (normal.length() * Vector2.UP.length()))
+			MusicController.play_fx("walk_sound")
+		else:
+			MusicController.stop_fx("walk_sound")
 		if hit_wall:
 			normal = Vector2.UP
 			var curr_move_angle = atan2(normal.y,normal.x) + (PI/2 if moving_right else -PI/2)
@@ -67,6 +70,7 @@ func _physics_process(delta):
 			else:
 				moving_right = !moving_right
 	else:
+		MusicController.stop_fx("walk_sound")
 		body.rotation = max(0,abs(body.rotation)-PI/30.0)*sign(body.rotation)
 	
 	if vel.x < 0:

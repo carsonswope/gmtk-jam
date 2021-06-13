@@ -95,6 +95,7 @@ func _notification(what):
 		get_tree().quit() # default behavior
 	
 func play_pause_click():
+	MusicController.play_fx("click_sound")
 	if current_game_state == GameState.LEVEL_START or current_game_state == GameState.LEVEL_PAUSED:
 		# clicked play button to begin the simulation!
 		current_game_state = GameState.LEVEL_RUNNING
@@ -153,10 +154,12 @@ func init_main_menu():
 
 func _on_level_click(lvl_idx):
 	if (init_level(lvl_idx)):
+		MusicController.play_fx("click_sound")
 		for child in $menu_gui_root.get_children():
 			$menu_gui_root.remove_child(child)
 
 func return_to_main_menu():
+	MusicController.play_fx("click_sound")
 	if current_level:
 		remove_child(current_level)
 		current_level = null
@@ -165,9 +168,11 @@ func return_to_main_menu():
 	init_main_menu()
 
 func reset_click():
+	MusicController.play_fx("click_sound")
 	init_level(current_level_idx)
 
 func reset_soft_click():
+	MusicController.play_fx("click_sound")
 	# reset
 	var platform_placements = current_level.get_initial_platform_placements()
 	var pin_placements = current_level.get_initial_pin_placements()
@@ -176,6 +181,7 @@ func reset_soft_click():
 	current_level.place_pins(pin_placements)
 
 func new_pin_click():
+	MusicController.play_fx("click_sound")
 	current_level.placing_pin = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -15,7 +15,15 @@ var fx = {
 		load("res://resources/music/Sound Design - Mastered oggs/Pin out pool/pinout3.ogg"),		
 		load("res://resources/music/Sound Design - Mastered oggs/Pin out pool/pinout4.ogg"),		
 		load("res://resources/music/Sound Design - Mastered oggs/Pin out pool/pinout5.ogg"),		
-		load("res://resources/music/Sound Design - Mastered oggs/Pin out pool/pinout6.ogg"),		]
+		load("res://resources/music/Sound Design - Mastered oggs/Pin out pool/pinout6.ogg"),		],
+	"walk_sound":		
+		[load("res://resources/music/Sound Design - Mastered oggs/Crackles pool/crackles1.ogg"),		
+		load("res://resources/music/Sound Design - Mastered oggs/Crackles pool/crackles2.ogg"),		
+		load("res://resources/music/Sound Design - Mastered oggs/Crackles pool/crackles3.ogg")],
+	"click_sound":
+		[load("res://resources/music/Sound Design - Mastered oggs/Click pool/click1.ogg"),		
+		load("res://resources/music/Sound Design - Mastered oggs/Click pool/click2.ogg"),		
+		load("res://resources/music/Sound Design - Mastered oggs/Click pool/click3.ogg"),		]
 }
 
 var curr_fx = null
@@ -36,11 +44,16 @@ func _ready():
 func play_fx(fx_name = ""):
 	if fx_name in fx:
 		if (!$FX.playing or curr_fx != fx_name):
+			curr_fx = fx_name
 			var pool = fx[fx_name]
 			var stream = pool[rng.randi_range(0,pool.size()-1)]
 			stream.loop = false
 			$FX.stream = stream
 			$FX.play()
+
+func stop_fx(fx_name = ""):
+	if curr_fx == fx_name:
+		$FX.stop()
 
 func play_music(song = ""):
 	if !$Music.playing:
