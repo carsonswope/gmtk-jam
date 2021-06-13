@@ -101,7 +101,7 @@ func init_main_menu():
 		var level_button = Button.new()
 		level_button.text = String(i+1)
 		level_button.margin_left = i * 40
-		level_button.disabled = false if i==0 else !levels_solved[String(i-1)][0]
+		level_button.disabled = false if (i==0 or OS.is_debug_build()) else !levels_solved[String(i-1)][0]
 		level_button.connect("button_up", self, "_on_level_click", [i])
 		$menu_gui_root.add_child(level_button)
 		
