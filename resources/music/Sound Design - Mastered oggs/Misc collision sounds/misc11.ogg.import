@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/misc11.ogg-e9caf3806b7ee324aff26794f88cfe80.oggstr"
+
+[deps]
+
+source_file="res://resources/music/Sound Design - Mastered oggs/Misc collision sounds/misc11.ogg"
+dest_files=[ "res://.import/misc11.ogg-e9caf3806b7ee324aff26794f88cfe80.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

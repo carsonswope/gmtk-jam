@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pinin3.ogg-07022e1e4311b563d341acb89fba71d5.oggstr"
+
+[deps]
+
+source_file="res://resources/music/Sound Design - Mastered oggs/Pin in pool/pinin3.ogg"
+dest_files=[ "res://.import/pinin3.ogg-07022e1e4311b563d341acb89fba71d5.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
