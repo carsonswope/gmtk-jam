@@ -5,7 +5,9 @@ const TILE_SIZE = 40
 const corners = ["1010","0000","0101",		
 "1010","0000","0101",		
 "1100","0000","0011",		
-"1100","0000","0011"]
+"1100","0000","0011",		
+"1000","0100","0010","0001","0000","0000","0000","0000","0000",		
+"1000","0100","0010","0001","0000","0000","0000","0000","0000"]
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -71,7 +73,7 @@ func add_colliders(x : int, y : int, id : int):
 func coords_in_hole(pos):
 	for cell in $tiles.get_used_cells():
 		var id = $tiles.get_cell(cell.x, cell.y)
-		if id in [0,1,2,6,7,8]: # these are types of tiles with holes in them
+		if id in [0,1,2,6,7,8,12,13,14,15,16,17,18,19,20]: # these are types of tiles with holes in them
 			var base_pos = $body.position
 			var unit_x = Vector2(cos($body.rotation),sin($body.rotation))
 			var unit_y = Vector2(-sin($body.rotation),cos($body.rotation))
