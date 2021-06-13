@@ -68,6 +68,7 @@ func stop_fx(fx_name = ""):
 func play_music(song = ""):
 	if !$Music.playing or song != curr_song:
 		if song in music:
+			curr_song = song
 			$Music.stream = music[song]
 			$Music.stream.loop = true
 			$Music.play()

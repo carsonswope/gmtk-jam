@@ -117,6 +117,7 @@ func toggle_game_gui_visibility(visible : bool):
 		item.visible = visible
 
 func init_main_menu():
+	MusicController.play_music("specialzone")
 	toggle_game_gui_visibility(false)
 	var est = floor(sqrt(NUM_LEVELS))
 	var choice = int(est)
