@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/theboard_80.ogg-cb665376f5a19ce26f2cca9c41d3b41f.oggstr"
+
+[deps]
+
+source_file="res://resources/music/Mastered OST Oggs/theboard_80.ogg"
+dest_files=[ "res://.import/theboard_80.ogg-cb665376f5a19ce26f2cca9c41d3b41f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

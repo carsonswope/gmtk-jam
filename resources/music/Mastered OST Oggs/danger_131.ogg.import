@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/danger_131.ogg-24216046344893ddfb089c55faf0c86b.oggstr"
+
+[deps]
+
+source_file="res://resources/music/Mastered OST Oggs/danger_131.ogg"
+dest_files=[ "res://.import/danger_131.ogg-24216046344893ddfb089c55faf0c86b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
