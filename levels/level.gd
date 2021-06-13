@@ -3,6 +3,8 @@ extends Node2D
 const GameState = preload("res://GameState.gd")
 
 const Pin = preload("res://Pin.tscn")
+const PinMoving = preload("res://PinMoving.tscn")
+
 
 export var num_placeable_pins = 2
 
@@ -34,12 +36,10 @@ func _ready():
 	for p in get_tree().get_nodes_in_group("PlatformContainers"):
 		placed_platform_positions.append(p.position)
 		
-	var pin = Pin.instance()
-	placing_pin_icon = pin.get_node("icon")
-	pin.remove_child(placing_pin_icon)
+	placing_pin_icon = PinMoving.instance()
 	add_child(placing_pin_icon)
-	
-	placing_pin_icon.position = Vector2(-20, -20)
+	placing_pin_icon.position = Vector2(-100, -100)
+	placing_pin_icon.z_index = 10
 
 func is_completed():
 	return $layout/NextLevel.completed
@@ -51,11 +51,6 @@ func set_game_state(s):
 	elif s == GameState.LEVEL_PAUSED:
 		$layout.get_tree().paused = true
 	elif s == GameState.LEVEL_RUNNING:
-		#if placed_pins_init_positions == null:
-		#	var placed_pins_init_positions = []
-		#	for p in placed_pins:
-		#		placed_pins_init_positions.append(p.initial_position)
-		#	return placed_pins_init_positions
 		$layout.get_tree().paused = false
 	current_game_state = s
 
@@ -113,7 +108,7 @@ func place_pin(pos, initial_position=Vector2(-1, -1)):
 	placed_pins.append(pin)
 	placing_pin = false
 	placing_pin_original_position = null
-	placing_pin_icon.position = Vector2(-20, -20)
+	placing_pin_icon.position = Vector2(-100, -100)
 
 	if joint_setup:
 		var pin_body = placed_pins[-1]
@@ -206,7 +201,7 @@ func _unhandled_input(e):
 			else:
 				placing_pin = false
 
-			placing_pin_icon.position = Vector2(-20, -20)
+			placing_pin_icon.position = Vector2(-100, -100)
 
 		# right click to 'reset' platform move
 		elif current_game_state == GameState.LEVEL_START:

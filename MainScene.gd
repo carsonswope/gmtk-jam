@@ -11,7 +11,7 @@ var current_game_state = GameState.MAIN_MENU
 #stuff to save
 
 var levels_solved = {} #best pin count, whether the user got a special thing, etc
-var play_time #milliseconds
+var play_time = 0 #milliseconds
 
 
 const LEVELS = [

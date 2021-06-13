@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://resources/sprites/pin_moving.png" type="Texture" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="pin_moving" type="Sprite" parent="."]
+position = Vector2( 20, 20 )
+rotation = 1.5708
+scale = Vector2( 0.79912, 0.796147 )
+texture = ExtResource( 1 )

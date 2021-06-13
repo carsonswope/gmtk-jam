@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/platformChar_jump.png-49c188738776145ef3f6ad725b64e229.stex"
+path="res://.import/pin_inplace.png-170ea309494d53a0a00b68dca5136054.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/platformChar_jump.png"
-dest_files=[ "res://.import/platformChar_jump.png-49c188738776145ef3f6ad725b64e229.stex" ]
+source_file="res://resources/sprites/pin_inplace.png"
+dest_files=[ "res://.import/pin_inplace.png-170ea309494d53a0a00b68dca5136054.stex" ]
 
 [params]
 
