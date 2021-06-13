@@ -92,6 +92,7 @@
 [node name="Node2D" type="Node2D" groups=[
 "PlatformContainers",
 ]]
+z_index = 1
 script = ExtResource( 1 )
 
 [node name="tiles" type="TileMap" parent="."]

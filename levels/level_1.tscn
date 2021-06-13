@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/level.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://PlatformContainer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://resources/tilesets/corkboard.png" type="Texture" id=6]
 [ext_resource path="res://resources/fonts/main_font.tres" type="DynamicFont" id=7]
+[ext_resource path="res://resources/sprites/tape.png" type="Texture" id=8]
 
 [sub_resource type="TileSet" id=1]
 2/name = "corkboard.png 2"
@@ -104,6 +105,34 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="tape" type="Sprite" parent="."]
+position = Vector2( 255.739, 358.7 )
+rotation = -0.354302
+scale = Vector2( 1.00905, 1 )
+texture = ExtResource( 8 )
+offset = Vector2( -61.5775, -19.9999 )
+
+[node name="tape2" type="Sprite" parent="."]
+position = Vector2( 765.546, 607.6 )
+rotation = 0.914553
+scale = Vector2( 1.40041, 1 )
+texture = ExtResource( 8 )
+offset = Vector2( -61.5775, -19.9999 )
+
+[node name="tape3" type="Sprite" parent="."]
+position = Vector2( 234.42, 596.31 )
+rotation = 1.67552
+scale = Vector2( 0.815816, 1 )
+texture = ExtResource( 8 )
+offset = Vector2( -61.5775, -19.9999 )
+
+[node name="tape4" type="Sprite" parent="."]
+position = Vector2( 577.42, 97.3104 )
+rotation = 2.43648
+scale = Vector2( 0.815816, 1 )
+texture = ExtResource( 8 )
+offset = Vector2( -61.5775, -19.9999 )
 
 [editable path="layout/Platform 1"]
 [editable path="layout/Terrain"]
