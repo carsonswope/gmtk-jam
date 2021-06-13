@@ -8,6 +8,7 @@ var floor_angle : float = PI/4.0;
 var vel : Vector2 = Vector2()
 var moving_right : bool = true
 var jump_height : float = 40
+var hat_animation_time = null
 
 var time_til_next_jump = null
 onready var sprite : AnimatedSprite = get_node("FullBody/Sprite")
@@ -61,6 +62,7 @@ func _physics_process(delta):
 				time_til_next_jump = 0.5
 				#play jump sound
 				print ("jumping")
+				hat_animation_time = 0.4
 				vel.y = -jump_vel
 			else:
 				moving_right = !moving_right
@@ -77,5 +79,11 @@ func _physics_process(delta):
 		sprite.animation = "walk"
 		sprite.playing = false
 		sprite.frame = 3
-	hat.offset = Vector2(-10 if sprite.flip_h else 10, 0.0)
+	var hat_height = 0.0
+	if hat_animation_time:
+		hat_animation_time -= delta
+		hat_height = -10*sin((hat_animation_time/0.4) * PI)
+		if (hat_animation_time < 0):
+			hat_animation_time = null
+	hat.offset = Vector2(-10 if sprite.flip_h else 10, hat_height)
 	sprite.flip_h = !moving_right

@@ -26,7 +26,6 @@ func _ready():
 	var y_start = (y)*y_size
 	var remainder = float(num_levels % ((rows-1) * choice))
 	var cols = ((float(choice) if (best == 0 or y < rows-1) else remainder))
-	print(cols)
 	var x_size = texResolution.x / cols
 	var x_start = (current_level % choice) * x_size
 	region_rect = Rect2(Vector2(x_start,y_start),Vector2(x_size,y_size))
@@ -37,7 +36,5 @@ func _ready():
 	$Hitbox.scale = $Hitbox.scale / scale
 
 func _on_Hitbox_body_entered(collider) -> void:
-	print("collision!")
-	if collider.is_in_group("Player"):
-		print("collision with player!")		
+	if collider.is_in_group("Player"):	
 		completed = true
