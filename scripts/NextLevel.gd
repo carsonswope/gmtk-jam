@@ -34,6 +34,7 @@ func _ready():
 	for child in get_children():
 		if child is Sprite:
 			child.scale = child.scale / scale
+	$Hitbox.scale = $Hitbox.scale / scale
 
 func _on_Hitbox_body_entered(collider) -> void:
 	print("collision!")

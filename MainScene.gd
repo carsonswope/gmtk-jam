@@ -123,7 +123,7 @@ func init_main_menu():
 	var rows = int(ceil(float(NUM_LEVELS)/float(choice)))
 	var projectResolution=OS.get_window_size()
 	for i in NUM_LEVELS:
-		var level_button = ToolButton.new()
+		var level_button = Button.new()
 		level_button.text = String(i+1)
 		var y = ceil(float(i / choice))
 		var y_portion = (y+1)/float(rows+1)
