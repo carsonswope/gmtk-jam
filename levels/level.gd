@@ -40,6 +40,7 @@ func _ready():
 	add_child(placing_pin_icon)
 	placing_pin_icon.position = Vector2(-100, -100)
 	placing_pin_icon.z_index = 10
+	
 
 func is_completed():
 	return $layout/NextLevel.completed
@@ -103,8 +104,9 @@ func place_pin(pos, initial_position=Vector2(-1, -1)):
 			
 	if joint_setup == null:
 		for p in get_platforms():
-			if p.coords_in_platform(pos):
-				return -1
+			for mod in [Vector2(0,0),Vector2(-10,0),Vector2(10,0),Vector2(0,-10),Vector2(0,10)]:
+				if p.coords_in_platform(pos + mod):
+					return -1
 
 	var pin = Pin.instance()
 	pin.position = pos
@@ -276,13 +278,29 @@ func prune_joints():
 		if not pin:
 			remove_child(j)
 
+func pin_eligible(pos):
+	for p in get_platforms():
+		var hole_coords = p.coords_in_hole(pos)
+		if hole_coords:
+			return hole_coords
+			
+	for p in get_platforms():
+		for mod in [Vector2(0,0),Vector2(-10,0),Vector2(10,0),Vector2(0,-10),Vector2(0,10)]:
+			if p.coords_in_platform(pos + mod):
+				return null
+	
+	return pos
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
 	prune_joints()
 	
 	if placing_pin:
-		placing_pin_icon.position = get_viewport().get_mouse_position()
+		var placing_pin_pos = get_viewport().get_mouse_position()
+		var eligible = pin_eligible(placing_pin_pos)
+		placing_pin_icon.position = eligible if eligible else placing_pin_pos
+		placing_pin_icon.get_child(1).modulate = Color(1,1,1,0.4) if eligible else Color(1,0,0,0.2)
 	
 	if current_game_state == GameState.LEVEL_START:
 		if moving_platform:
