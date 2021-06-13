@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/screwin15.wav-d4690a52047a6171e445e119ee11985b.sample"
+
+[deps]
+
+source_file="res://resources/music/Sound Design/Game Sounds/Screwing Sounds/screwin15.wav"
+dest_files=[ "res://.import/screwin15.wav-d4690a52047a6171e445e119ee11985b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
