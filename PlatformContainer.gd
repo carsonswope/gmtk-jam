@@ -91,5 +91,22 @@ func coords_in_platform(mouse_position):
 	for c in $body.get_children():
 		if c.shape.collide(c.transform,mouse_circle,Transform2D(0.0,position + $body.position-mouse_position)):
 			return true
+	return false
 
+func would_overlap_with_other_pin_in_position(pin, pos):
+	var pin_circle = CircleShape2D.new()
+	pin_circle.set_radius(11)
+	for c in $body.get_children():
+		if c.shape.collide(c.transform.translated(position + $body.position),pin_circle,Transform2D(0.0, pin.position)):
+			return true
+	return false
+
+func would_overlap_with_other_platform_in_position(other, pos):
+	for c in $body.get_children():
+		var c_tf = c.transform.translated(pos + $body.position)
+		var o_b = other.get_node("body")
+		for o_c in o_b.get_children():
+			var oc_tf = o_c.transform.translated(other.position + o_b.position)
+			if c.shape.collide(c_tf, o_c.shape, oc_tf):
+				return true
 	return false
