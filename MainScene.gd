@@ -11,6 +11,8 @@ var gamejam_tex = preload("res://resources/sprites/gamejam.png")
 var normal_font = preload("res://resources/fonts/main_font.tres")
 var title_font = preload("res://resources/fonts/title.tres")
 
+var EndGame = preload("res://EndGame.tscn")
+
 #stuff to save
 
 var levels_solved = {} #best pin count, whether the user got a special thing, etc
@@ -184,9 +186,20 @@ func new_pin_click():
 	MusicController.play_fx("click_sound")
 	current_level.placing_pin = true
 
+func show_end_game():
+	
+	if current_level:
+		remove_child(current_level)
+	current_level = null
+	current_level_idx = -1
+	toggle_game_gui_visibility(false)
+	current_game_state = GameState.CREDITS
+	var end_game = EndGame.instance()
+	add_child(end_game)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if current_game_state == GameState.MAIN_MENU:
+	if current_game_state == GameState.MAIN_MENU or current_game_state == GameState.CREDITS:
 		return
 	if current_level != null:
 		if current_level.player_out_of_bounds():
@@ -203,22 +216,22 @@ func _process(delta):
 			save_game()
 			var next_level_idx = current_level_idx + 1
 			if next_level_idx >= LEVELS.size():
-				# but really, got to make an end-state
-				print('game over ! you win !')
+				show_end_game()
+				return
 			else:
 				print('advanced to next level!')
 				init_level(next_level_idx)
 	
-	var num_unplaced_pins = current_level.num_unplaced_pins()
-	$gui_root/new_pin_button.disabled = num_unplaced_pins == 0
-	$gui_root/new_pin_counter.set_text('x(' + str(num_unplaced_pins) +')')
-	
-	$gui_root/reset_soft_button.disabled = current_game_state == GameState.LEVEL_START
+		var num_unplaced_pins = current_level.num_unplaced_pins()
+		$gui_root/new_pin_button.disabled = num_unplaced_pins == 0
+		$gui_root/new_pin_counter.set_text('x(' + str(num_unplaced_pins) +')')
+		
+		$gui_root/reset_soft_button.disabled = current_game_state == GameState.LEVEL_START
 
-	$gui_root/level_label.set_text('Level ' + str(current_level_idx+1))
-	if current_game_state == GameState.LEVEL_START or current_game_state == GameState.LEVEL_PAUSED:
-		$gui_root/play_pause_button.set_text('play')
-	elif current_game_state == GameState.LEVEL_RUNNING:
-		$gui_root/play_pause_button.set_text('pause')
-	else:
-		print('huh?')
+		$gui_root/level_label.set_text('Level ' + str(current_level_idx+1))
+		if current_game_state == GameState.LEVEL_START or current_game_state == GameState.LEVEL_PAUSED:
+			$gui_root/play_pause_button.set_text('play')
+		elif current_game_state == GameState.LEVEL_RUNNING:
+			$gui_root/play_pause_button.set_text('pause')
+		else:
+			print('huh?')
