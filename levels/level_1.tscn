@@ -100,7 +100,7 @@ margin_right = 997.0
 margin_bottom = 574.0
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Pins can be moved while the guy moves, but you can only move strips of paper before clicking \"play\""
+text = "Pins can be moved while the guy moves and while the game is paused, but you can only move strips of paper prior to clicking \"play\""
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false

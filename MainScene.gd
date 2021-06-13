@@ -7,6 +7,9 @@ const GameState = preload("res://GameState.gd")
 var session_start_time
 var current_game_state = GameState.MAIN_MENU
 
+var normal_font = preload("res://resources/fonts/main_font.tres")
+var title_font = preload("res://resources/fonts/title.tres")
+
 #stuff to save
 
 var levels_solved = {} #best pin count, whether the user got a special thing, etc
@@ -100,13 +103,44 @@ func toggle_game_gui_visibility(visible : bool):
 
 func init_main_menu():
 	toggle_game_gui_visibility(false)
+	var est = floor(sqrt(NUM_LEVELS))
+	var choice = int(est)
+	var best = NUM_LEVELS % int(est)
+	if best != 0:
+		for guess in [int(est-1),int(est+1)]:
+			if guess == 1:
+				continue
+			var remainder = NUM_LEVELS % guess
+			if remainder == 0:
+				choice = guess
+				break
+			elif remainder > best:
+				best = NUM_LEVELS % guess
+				choice = guess
+	var rows = int(ceil(float(NUM_LEVELS)/float(choice)))
+	var projectResolution=OS.get_window_size()
 	for i in NUM_LEVELS:
 		var level_button = Button.new()
 		level_button.text = String(i+1)
-		level_button.margin_left = i * 40
+		var y = ceil(float(i / choice))
+		var y_portion = (y+1)/float(rows+1)
+		var remainder = float(NUM_LEVELS % ((rows-1) * choice))
+		print(remainder)
+		var x_portion = float(i % choice + 1) /((float(choice) if (best == 0 or y < rows-1) else remainder)+1) 
+		level_button.margin_left = projectResolution.x * x_portion
+		level_button.margin_top = projectResolution.y * y_portion
+#		level_button.anchor_bottom = 0.5
+#		level_button.anchor_right = 0.5
+#		level_button.anchor_left = 0.5
+#		level_button.anchor_top = 0.5
+		level_button.add_font_override("font",normal_font)
 		level_button.disabled = false if (i==0 or OS.is_debug_build()) else !levels_solved[String(i-1)][0]
 		level_button.connect("button_up", self, "_on_level_click", [i])
 		$menu_gui_root.add_child(level_button)
+	var game_title = Label.new()
+	game_title.text = "Corkboard"
+	game_title.add_font_override("font",title_font)
+	$menu_gui_root.add_child(game_title)	
 		
 
 func _on_level_click(lvl_idx):
