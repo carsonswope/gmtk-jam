@@ -100,6 +100,11 @@ func place_pin(pos, initial_position=Vector2(-1, -1)):
 				initial_position = hole_coords
 			pos = hole_coords
 			joint_setup = [p, hole_coords]
+			
+	if joint_setup == null:
+		for p in get_platforms():
+			if p.coords_in_platform(pos):
+				return -1
 
 	var pin = Pin.instance()
 	pin.position = pos
@@ -122,6 +127,8 @@ func place_pin(pos, initial_position=Vector2(-1, -1)):
 		j.node_b = platform_body.get_path()
 		j.disable_collision = true
 		add_child(j)
+	
+	return 0
 
 
 func pin_clicked(mouse_position):
@@ -153,10 +160,17 @@ func _unhandled_input(e):
 				init_position = Vector2(-1, -1)
 			else:
 				init_position = placing_pin_init_position
-			place_pin(mouse_position, init_position)
+			if place_pin(mouse_position, init_position) == -1:
+				# placement failed, 
+				# only reset pin back to original when level is still not moving
+				if placing_pin_original_position and current_game_state == GameState.LEVEL_START:
+					place_pin(placing_pin_original_position, placing_pin_original_position)
+				else:
+					placing_pin = false
+				placing_pin_icon.position = Vector2(-100, -100)
 		
 		# pickin a pin up..
-		elif pin_clicked(mouse_position) > -1:
+		elif moving_platform == null and pin_clicked(mouse_position) > -1:
 			var clicked_pin_idx = pin_clicked(mouse_position)
 			placing_pin_original_position = placed_pins[clicked_pin_idx].position
 			placing_pin_init_position = placed_pins[clicked_pin_idx].initial_position
@@ -185,10 +199,46 @@ func _unhandled_input(e):
 			# currently moving a platform - snap platform to intented position
 			else:
 				var new_platform_position = moving_platform_start_pos + (get_viewport().get_mouse_position() - moving_platform_start_mouse_pos)
-				moving_platform.position = new_platform_position
-				#p_idx = get_tree().get_nodes_in_group("PlatformContainers").
-				placed_platform_positions[moving_platform_idx] = new_platform_position
+				
+				# well, would it overlap any existing platforms?
+				var platforms = get_platforms()
+				var ineligible = false
+				for p in platforms:
+					if p != moving_platform:
+						if moving_platform.would_overlap_with_other_platform_in_position(p, new_platform_position):
+							ineligible = true
+							break
+				
+				# no, okay then, would it overlap any existing pins?
+				if not ineligible:
+					for p in placed_pins:
+						if moving_platform.would_overlap_with_other_pin_in_position(p, new_platform_position):
+							ineligible = true
+							break
+				
+				# no, okay the, would it overlap the terrain?
+				if not ineligible:
+					var terrain = $layout/Terrain/Terrain
+					#terrain.
+					#terrain.get_
+					for cell in terrain.get_used_cells():
+						#var id = terrain.get_cell(cell.x, cell.y)
+						#print(id)
+						var cell_pos = terrain.map_to_world(cell) + Vector2(20, 20)
+						#var cell_pos = Vector2(cell.x + 0.5, cell.y + 0.5) * 40 # TILE_SIZE :)
+						if moving_platform.would_overlap_with_other_cell_pos_in_position(cell_pos, new_platform_position):
+							ineligible = true
+							break
+						#var id = terrain.get_cell(cell.x, cell.y)
+				
+				if ineligible:
+					moving_platform.position = moving_platform_start_pos
+				else:
+					moving_platform.position = new_platform_position
+					placed_platform_positions[moving_platform_idx] = new_platform_position
+
 				clear_moving_platform()
+				return
 	
 	# right mouse click! reset/cancel the stuff
 	elif e.button_index == BUTTON_RIGHT and e.is_pressed():
@@ -197,10 +247,8 @@ func _unhandled_input(e):
 			# only reset pin back to original when level is still not moving
 			if placing_pin_original_position and current_game_state == GameState.LEVEL_START:
 				place_pin(placing_pin_original_position, placing_pin_original_position)
-
 			else:
 				placing_pin = false
-
 			placing_pin_icon.position = Vector2(-100, -100)
 
 		# right click to 'reset' platform move
