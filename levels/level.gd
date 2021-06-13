@@ -171,6 +171,8 @@ func _unhandled_input(e):
 				else:
 					placing_pin = false
 				placing_pin_icon.position = Vector2(-100, -100)
+			else:
+				MusicController.play_fx("place_pin")
 		
 		# pickin a pin up..
 		elif moving_platform == null and pin_clicked(mouse_position) > -1:
@@ -180,6 +182,7 @@ func _unhandled_input(e):
 			remove_child(placed_pins[clicked_pin_idx])
 			placed_pins.remove(clicked_pin_idx)
 			placing_pin = true
+			MusicController.play_fx("pickup_pin")
 
 		# if in game start mode, check to see if the click was on a container
 		elif current_game_state == GameState.LEVEL_START:
