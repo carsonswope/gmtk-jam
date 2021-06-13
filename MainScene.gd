@@ -67,6 +67,7 @@ func _ready():
 	$gui_root/reset_button.connect("button_up", self, "reset_click")
 	$gui_root/new_pin_button.connect("button_up", self, "new_pin_click")
 	#reset_save()
+	$gui_root/reset_soft_button.connect("button_up", self, "reset_soft_click")
 	load_save()
 	session_start_time = OS.get_ticks_msec()
 	init_main_menu()
@@ -118,6 +119,14 @@ func return_to_main_menu():
 func reset_click():
 	init_level(current_level_idx)
 
+func reset_soft_click():
+	# reset
+	var platform_placements = current_level.get_initial_platform_placements()
+	var pin_placements = current_level.get_initial_pin_placements()
+	init_level(current_level_idx)
+	current_level.place_platforms(platform_placements)
+	current_level.place_pins(pin_placements)
+
 func new_pin_click():
 	current_level.placing_pin = true
 
@@ -149,7 +158,7 @@ func _process(delta):
 	$gui_root/new_pin_button.disabled = num_unplaced_pins == 0
 	$gui_root/new_pin_button.set_text('^ (' + str(num_unplaced_pins) + ')' )
 	
-	$gui_root/reset_button.disabled = current_game_state == GameState.LEVEL_START
+	$gui_root/reset_soft_button.disabled = current_game_state == GameState.LEVEL_START
 
 	$gui_root/level_label.set_text('Current level: ' + str(current_level_idx))
 	if current_game_state == GameState.LEVEL_START or current_game_state == GameState.LEVEL_PAUSED:

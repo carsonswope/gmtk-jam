@@ -40,10 +40,21 @@ __meta__ = {
 }
 
 [node name="new_pin_button" type="Button" parent="gui_root"]
+margin_left = 112.0
+margin_top = 24.0
+margin_right = 144.0
+margin_bottom = 48.0
+text = "pin"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="reset_soft_button" type="Button" parent="gui_root"]
 margin_left = 80.0
 margin_top = 24.0
 margin_right = 104.0
 margin_bottom = 48.0
+text = "<"
 __meta__ = {
 "_edit_use_anchors_": false
 }
