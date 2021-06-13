@@ -1,6 +1,15 @@
 extends Node
 
-var main_music = load("res://resources/music/placeholder.wav")
+var music = {
+	"bigbad": load("res://resources/music/Mastered OST Oggs/bigbad_80.ogg"),
+	"birth": load("res://resources/music/Mastered OST Oggs/birthofalargeboy_80.ogg"),
+	"danger": load("res://resources/music/Mastered OST Oggs/danger_131.ogg"),
+	"eight": load("res://resources/music/Mastered OST Oggs/eight.ogg"),
+	"exploration": load("res://resources/music/Mastered OST Oggs/exploration_106.ogg"),
+	"percolating": load("res://resources/music/Mastered OST Oggs/percolating_80.ogg"),
+	"specialzone": load("res://resources/music/Mastered OST Oggs/specialzone_80.ogg"),
+	"theboard": load("res://resources/music/Mastered OST Oggs/theboard_80.ogg"),
+}
 var fx = {
 	"place_pin":		
 		[load("res://resources/music/Sound Design - Mastered oggs/Pin in pool/pinin1.ogg"),		
@@ -27,6 +36,7 @@ var fx = {
 }
 
 var curr_fx = null
+var curr_song = null
 var rng = RandomNumberGenerator.new()
 # Declare member variables here. Examples:
 # var a = 2
@@ -56,6 +66,8 @@ func stop_fx(fx_name = ""):
 		$FX.stop()
 
 func play_music(song = ""):
-	if !$Music.playing:
-		$Music.stream = main_music
-		#$Music.play()
+	if !$Music.playing or song != curr_song:
+		if song in music:
+			$Music.stream = music[song]
+			$Music.stream.loop = true
+			$Music.play()
