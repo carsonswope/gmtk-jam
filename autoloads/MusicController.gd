@@ -49,6 +49,8 @@ enum tracks {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$FX.volume_db = -18
+	$Music.volume_db = -12
 	pass # Replace with function body.
 
 func play_fx(fx_name = ""):
